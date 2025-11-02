@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+.explore-building-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Background Building Image */
+.building-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.building-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  ),
+  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23E6F3FF"/><stop offset="100%" style="stop-color:%23B3D9FF"/></linearGradient><linearGradient id="building" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23333"/><stop offset="100%" style="stop-color:%23555"/></linearGradient></defs><rect width="1200" height="800" fill="url(%23sky)"/><rect x="200" y="200" width="800" height="600" fill="url(%23building)"/><rect x="250" y="250" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="400" y="250" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="550" y="250" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="700" y="250" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="250" y="400" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="400" y="400" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="550" y="400" width="100" height="100" fill="%23FFD700" opacity="0.8"/><rect x="700" y="400" width="100" height="100" fill="%23FFD700" opacity="0.8"/><text x="500" y="150" text-anchor="middle" font-family="Arial" font-size="48" font-weight="bold" fill="%23FFD700">HARSUKH RESIDENCIES</text></svg>');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Top Left Controls */
+.top-left-controls {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+  color: white;
+}
+
+.building-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.elevation-btn {
+  justify-content: space-between;
+}
+
+.filter-btn {
+  justify-content: flex-start;
+}
+
+/* Top Right Controls */
+.top-right-controls {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.icon-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.icon-btn span {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.amenities-btn {
+  min-width: 80px;
+}
+
+.about-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 215, 0, 0.9);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.about-btn:hover {
+  background: #FFD700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Bottom Left - Developer Info */
+.bottom-left-info {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  z-index: 10;
+  color: white;
+}
+
+.developer-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 5px;
+}
+
+.developer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Bottom Center - Rotate View */
+.bottom-center-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.rotate-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 12px 20px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rotate-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Bottom Right - Contact Info */
+.bottom-right-controls {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .building-title {
+    font-size: 1.8rem;
+  }
+  
+  .top-left-controls,
+  .top-right-controls,
+  .bottom-left-info,
+  .bottom-center-controls,
+  .bottom-right-controls {
+    padding: 15px;
+  }
+  
+  .control-btn {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+  
+  .icon-btn {
+    padding: 10px;
+    min-width: 50px;
+  }
+  
+  .about-btn {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .rotate-btn {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+  
+  .contact-btn {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .building-title {
+    font-size: 1.5rem;
+  }
+  
+  .top-left-controls,
+  .top-right-controls,
+  .bottom-left-info,
+  .bottom-center-controls,
+  .bottom-right-controls {
+    padding: 10px;
+  }
+  
+  .control-buttons {
+    gap: 8px;
+  }
+  
+  .control-btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    min-width: 90px;
+  }
+  
+  .icon-buttons {
+    gap: 8px;
+  }
+  
+  .icon-btn {
+    padding: 8px;
+    min-width: 45px;
+  }
+  
+  .icon-btn span {
+    font-size: 0.6rem;
+  }
+  
+  .about-btn {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+  
+  .rotate-btn {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+  
+  .contact-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .developer-logo {
+    font-size: 1.2rem;
+  }
+}
+

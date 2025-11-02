@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.footer {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 60px 40px 40px;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  border-top: 2px solid #FFD700;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.logo-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #FFD700;
+  letter-spacing: 2px;
+}
+
+.logo-line {
+  width: 200px;
+  height: 2px;
+  background: #FFD700;
+  margin: 0 auto 15px;
+}
+
+.logo-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 25px 0;
+  color: #FFD700;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-icon svg {
+  width: 100%;
+  height: 100%;
+  color: #FFD700;
+}
+
+.contact-item span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #FFD700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: rgba(255, 215, 0, 0.3);
+  border-color: #E6BE8A;
+  transform: translateY(-2px);
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #FFD700;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.email-input {
+  padding: 12px 16px;
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  background: rgba(255, 215, 0, 0.1);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.email-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.email-input:focus {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: #E6BE8A;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background: #FFD700;
+  color: #000000;
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submit-btn:hover {
+  background: #E6BE8A;
+  border-color: #E6BE8A;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .footer {
+    padding: 50px 30px 30px;
+  }
+  
+  .logo-text {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 30px;
+  }
+  
+  .logo-text {
+    font-size: 2rem;
+  }
+  
+  .logo-line {
+    width: 150px;
+  }
+  
+  .logo-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+  }
+  
+  .social-icons {
+    gap: 15px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .social-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px 25px;
+  }
+  
+  .logo-text {
+    font-size: 1.8rem;
+  }
+  
+  .logo-line {
+    width: 120px;
+  }
+  
+  .logo-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+  
+  .contact-item span {
+    font-size: 0.9rem;
+  }
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .social-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .email-input {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}

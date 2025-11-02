@@ -1,0 +1,373 @@
+.developer-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #000000;
+}
+
+/* Background */
+.developer-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: -1;
+}
+
+/* Developer Section */
+  .developer-section {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.developer-content {
+  color: #FFD700;
+}
+
+.developer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.developer-logo {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.logo-diamond {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #FFD700;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 1;
+}
+
+.company-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #FFD700;
+  margin: 0 0 40px 0;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: #FFD700;
+}
+
+.developer-text {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  text-align: justify;
+}
+
+.developer-paragraph {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  text-align: justify;
+}
+
+.developer-cta-section {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.developer-cta-button {
+  background: #FFD700;
+  color: #000000;
+  border: 2px solid #FFD700;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  letter-spacing: 1px;
+  text-align: center;
+  display: inline-block;
+}
+
+.developer-cta-button:hover {
+  background: #000000 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5) !important;
+  color: #FFD700 !important;
+  border: 2px solid #FFD700 !important;
+}
+
+/* Contact Icons */
+.contact-icons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 2px solid #006d77;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #006d77;
+}
+
+.contact-icon:hover {
+  background: #006d77;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 109, 119, 0.3);
+}
+
+/* Scroll Indicators */
+.scroll-indicators {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.scroll-dot {
+  width: 12px;
+  height: 8px;
+  background: #D2B48C;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scroll-dot:hover {
+  background: white !important;
+  border: 1px solid #006d77 !important;
+  transform: scale(1.1);
+}
+
+.scroll-dot.active {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .developer-section {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 20px 60px 20px 20px;
+    margin: 0 auto;
+    min-height: calc(100vh - 80px);
+  }
+  
+  .developer-title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .company-name {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  
+  .developer-text {
+    max-width: 100%;
+    margin-bottom: 30px;
+    padding: 0 10px; /* Added padding for better spacing */
+  }
+  
+  .developer-paragraph {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .developer-cta-section {
+    text-align: left;
+    margin-top: 30px;
+  }
+  
+  .scroll-indicators {
+    right: 15px; /* Adjusted right position */
+    gap: 10px;
+  }
+  
+  .contact-icons {
+    bottom: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+  
+  .contact-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .developer-cta-button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .developer-section {
+    top: 70px;
+    width: 100%;
+    padding: 15px 50px 15px 15px;
+    min-height: calc(100vh - 70px);
+  }
+  
+  .developer-title {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  
+  .company-name {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    line-height: 1.3;
+  }
+  
+  .developer-paragraph {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  
+  .scroll-indicators {
+    right: 10px; /* Adjusted right position */
+  }
+  
+  .developer-cta-button {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .developer-section {
+    top: 60px;
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    min-height: calc(100vh - 60px);
+  }
+  
+  .developer-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .company-name {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .developer-paragraph {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  
+  .scroll-indicators {
+    right: 8px; /* Adjusted right position */
+    gap: 8px;
+  }
+  
+  .contact-icons {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .developer-cta-button {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .developer-section {
+    top: 50px;
+    padding: 8px 35px 8px 8px;
+    min-height: calc(100vh - 50px);
+  }
+  
+  .developer-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  
+  .company-name {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .developer-paragraph {
+    font-size: 0.7rem;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  
+  .scroll-indicators {
+    right: 5px; /* Adjusted right position for smallest screens */
+  }
+  
+  .developer-cta-button {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+}
