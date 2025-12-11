@@ -1,99 +1,82 @@
 import React from 'react';
 import './Footer.css';
+import logoImg from '../assets/logo.png';
 
-function Footer() {
+function Footer({ scrollToSection }) {
+  const handleScroll = (sectionId) => {
+    if (scrollToSection) {
+      scrollToSection(sectionId);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        });
+      }
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Logo Section */}
-        <div className="footer-logo">
-          <h2 className="logo-text">OASIS PALM TOWER</h2>
-          <div className="logo-line"></div>
-          <p className="logo-subtitle">RESIDENCES</p>
-        </div>
-
-        {/* Main Footer Content */}
+        {/* Main Footer Content - 4 Columns */}
         <div className="footer-content">
-          {/* Left Section - Get in Touch */}
-          <div className="footer-section">
-            <h3 className="section-title">Get in Touch</h3>
-            <div className="contact-info">
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
-                </div>
-                <span>Plot No 46, Block B, Faisal Hills Islamabad</span>
+          {/* Column 1 - Logo and Company Info */}
+          <div className="footer-section footer-company">
+            <div className="footer-logo-section">
+              <img src={logoImg} alt="Oasis Palm Tower" className="footer-logo-img" />
+              {/* <h2 className="footer-company-name">OASIS PALM TOWER</h2> */}
+            </div>
+            <p className="footer-tagline">Experience upscale living in the heart of elegance.</p>
+            <p className="footer-cta">Step into luxury living.</p>
+            <a href="mailto:info@oasispalmtower.com" className="footer-email">info@oasispalmtower.com</a>
+          </div>
+
+          {/* Column 2 - Logo */}
+          <div className="footer-section footer-logo-text">
+            <div className="footer-brand-logo">
+              <h1 className="footer-brand-oasis">OASIS</h1>
+              <div className="footer-brand-palm-tower">
+                <span className="footer-brand-line"></span>
+                <span className="footer-brand-text">PALM TOWER</span>
+                <span className="footer-brand-line"></span>
               </div>
-              
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </div>
+            <div className="footer-social-section">
+              <h3 className="footer-social-title">Follow us on Social Media</h3>
+              <div className="footer-social-icons">
+                <a href="https://www.facebook.com/oasispalmtower" target="_blank" rel="noopener noreferrer" className="footer-social-icon" title="Facebook">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
-                </div>
-                <span>info@oasispalmtower.com</span>
-              </div>
-              
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </a>
+                <a href="https://www.instagram.com/oasispalmtower" target="_blank" rel="noopener noreferrer" className="footer-social-icon" title="Instagram">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                   </svg>
-                </div>
-                <span>0325-7414444</span>
+                </a>
+                <a href="https://www.tiktok.com/@oasispalmtower" target="_blank" rel="noopener noreferrer" className="footer-social-icon" title="TikTok">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  </svg>
+                </a>
+                <a href="https://youtube.com/@oasispalmtower" target="_blank" rel="noopener noreferrer" className="footer-social-icon" title="YouTube">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Middle Section - Social Media */}
-          <div className="footer-section">
-            <h3 className="section-title">Follow us on Social Media</h3>
-            <div className="social-icons">
-              <a href="#" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              
-              <a href="#" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              
-              <a href="#" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 2.48-3.58 4.4-6.07 5.55-1.46.67-3.03 1-4.59 1.01-2.56.09-5.12-.16-7.58-.93C.96 21.54.05 19.09.05 16.58c0-1.2.22-2.4.67-3.5.44-1.09 1.09-2.1 1.93-2.9.85-.8 1.8-1.45 2.84-1.9 1.03-.45 2.11-.7 3.2-.75 1.09-.05 2.19.02 3.26.34.53.16 1.04.38 1.51.66.01-1.13-.03-2.25-.05-3.38-.03-.66-.11-1.32-.26-1.98-.18-.92-.49-1.82-.92-2.66C8.44 1.48 7.45.8 6.46.3 5.47-.2 4.45-.4 3.43-.5c-1.03-.1-2.07-.06-3.1.12C.2.24-.1.5-.1.8c-.01.3.2.58.5.7 1.17.45 2.35.87 3.55 1.24.6.18 1.22.32 1.85.42.63.1 1.27.15 1.91.15.64 0 1.28-.05 1.92-.15.63-.1 1.25-.24 1.85-.42 1.2-.37 2.38-.79 3.55-1.24.3-.12.51-.4.5-.7-.01-.3-.3-.56-.6-.68-1.03-.18-2.07-.22-3.1-.12z"/>
-                </svg>
-              </a>
-              
-              <a href="#" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-              </a>
-              
-              <a href="#" className="social-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Section - Newsletter */}
-          <div className="footer-section">
-            <h3 className="section-title">Get the latest News from us</h3>
-            <div className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="Enter Your Email" 
-                className="email-input"
-              />
-              <button className="submit-btn">Submit</button>
-            </div>
+          {/* Column 3 - Address */}
+          <div className="footer-section footer-address">
+            <h3 className="footer-link-title">Address:</h3>
+            <p className="footer-address-text">Plot no 46, Commercial Market,<br />B Block, Faisal Hills,<br />Islamabad</p>
+            <h3 className="footer-link-title footer-contact-title">Contact:</h3>
+            <a href="tel:03257414444" className="footer-phone">0325-7414444</a>
           </div>
         </div>
       </div>

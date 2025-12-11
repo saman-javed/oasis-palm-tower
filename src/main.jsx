@@ -3,22 +3,22 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import About from './pages/About.jsx'
-import DownPayment from './pages/DownPayment.jsx'
-import Developer from './pages/Developer.jsx'
-import Blogs from './pages/Blogs.jsx'
 import ExploreBuilding from './pages/ExploreBuilding.jsx'
+import FloorDetail from './pages/FloorDetail.jsx'
+import ExplorePlan from './pages/ExplorePlan.jsx'
+import Amenities from './pages/Amenities.jsx'
+import Blogs from './pages/Blogs.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/down-payment" element={<DownPayment />} />
-        <Route path="/developer" element={<Developer />} />
-        <Route path="/blogs" element={<Blogs />} />
         <Route path="/explore-building" element={<ExploreBuilding />} />
+        <Route path="/floor/:floorId" element={<FloorDetail />} />
+        <Route path="/explore-plan/:floorId/:unitId?" element={<ExplorePlan />} />
+        <Route path="/amenities" element={<Amenities />} />
+        <Route path="/blogs" element={<Blogs />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

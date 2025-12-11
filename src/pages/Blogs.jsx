@@ -9,7 +9,7 @@ function Blogs() {
 
   return (
     <div className="blogs-page">
-      <Navbar activeSection="blogs" />
+      <Navbar />
       
       {/* Background */}
       <div className="blogs-background"></div>
@@ -20,19 +20,18 @@ function Blogs() {
         <div className="featured-blog">
           <div className="blog-card featured">
             <div className="blog-image">
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Green Building" />
+              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Oasis Palm Tower" />
               <div className="blog-icon">💎</div>
               <div className="blog-overlay">
-                <p>Federal Cabinet Approves Pakistan's First Green Building and Water Harvesting Code.</p>
+                <p>Oasis Palm Tower - A Three-in-One Luxury Development in Faisal Hills, Islamabad</p>
               </div>
             </div>
             <div className="blog-content">
-              <h2>Pakistan Approves Green Building & Rainwater Harvesting Codes for the First Time</h2>
+              <h2>Oasis Palm Tower - Your Complete Lifestyle Destination</h2>
               <button className="cta-button">Get in Touch</button>
               <p className="blog-description">
-                toward environmental sustainability, the federal cabinet has approved Pakistan's first-ever Green Building Code and Rainwater Harvesting Provisions. Announced b...
+                Oasis Palm Tower is a unique three-in-one development located in Faisal Hills, Islamabad. This exceptional project combines luxury hotels, premium apartment rooms, modern corporate offices, and ground floor commercial shops - all in one magnificent building. Experience the perfect blend of residential comfort, business convenience, and commercial opportunities...
               </p>
-              <a href="#" className="read-more">Read more</a>
             </div>
           </div>
         </div>
@@ -41,31 +40,28 @@ function Blogs() {
         <div className="blog-sidebar">
           <div className="blog-card small">
             <div className="blog-image">
-              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Islamabad Smart City" />
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Oasis Palm Tower Apartments" />
             </div>
             <div className="blog-content">
-              <p>Islamabad to be converted into a pilot smart city under Prime Minister's Digital Pakistan vision</p>
-              <a href="#" className="read-more">Read more</a>
+              <p>Luxury Apartments at Oasis Palm Tower - Modern Living in Faisal Hills</p>
             </div>
           </div>
 
           <div className="blog-card small">
             <div className="blog-image">
-              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Galiyat Real Estate" />
+              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Oasis Palm Tower Shops" />
             </div>
             <div className="blog-content">
-              <p>Unlocking Potential: How Galiyat Real Estate Delivers Unmatched ROI</p>
-              <a href="#" className="read-more">Read more</a>
+              <p>Commercial Shops at Oasis Palm Tower - Your Business Opportunity in Faisal Hills</p>
             </div>
           </div>
 
           <div className="blog-card small">
             <div className="blog-image">
-              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Galiyat Apartment" />
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Oasis Palm Tower Offices" />
             </div>
             <div className="blog-content">
-              <p>Buy Apartment in Galiyat</p>
-              <a href="#" className="read-more">Read more</a>
+              <p>Corporate Offices at Oasis Palm Tower - Prime Business Location in Islamabad</p>
             </div>
           </div>
         </div>
@@ -76,46 +72,43 @@ function Blogs() {
         <div className="additional-blogs-container">
           <div className="additional-blog-card">
             <div className="additional-blog-image">
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Harsukh Residencies" />
+              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower" />
               <div className="blog-overlay-text">
                 <div className="blog-tag">BLOG</div>
-                <div className="blog-subtitle">Oasis Palm Tower - Investment Among Nature</div>
+                <div className="blog-subtitle">Oasis Palm Tower - Three-in-One Development in Faisal Hills</div>
               </div>
             </div>
             <div className="additional-blog-content">
-              <h3>Oasis Palm Tower - Investment Among Nature</h3>
-              <p>Located in the majestic hills of Galiyat, near the Ayubia National Park, Oasis Palm Tower is a luxurious residential project offering a unique blend of modern living and natural beauty...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - Three-in-One Development in Faisal Hills</h3>
+              <p>Located in Faisal Hills, Islamabad, Oasis Palm Tower is a unique three-in-one development featuring luxury hotels, premium apartments, modern offices, and ground floor commercial shops. Experience the perfect blend of residential, commercial, and hospitality in one prime location...</p>
             </div>
           </div>
 
           <div className="additional-blog-card">
             <div className="additional-blog-image">
-              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Living" />
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower Plaza" />
               <div className="blog-overlay-text">
                 <div className="blog-tag">BLOG</div>
-                <div className="blog-subtitle">Oasis Palm Tower - An Era of Luxury Living</div>
+                <div className="blog-subtitle">Oasis Palm Tower - Your Plaza in Faisal Hills</div>
               </div>
             </div>
             <div className="additional-blog-content">
-              <h3>Oasis Palm Tower - An Era of Luxury Living in the Heart of Galiyat</h3>
-              <p>Located in the beautiful Galiyat region, specifically Ayubia, Oasis Palm Tower stands as a beacon of luxury living, offering residents a unique blend of comfort and nature...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - Your Plaza in Faisal Hills, Islamabad</h3>
+              <p>Oasis Palm Tower is more than just a building - it's a complete lifestyle plaza in Faisal Hills, Islamabad. With hotels, apartments, offices, and shops all under one roof, this is your opportunity to own a piece of prime real estate in one of Islamabad's most desirable locations...</p>
             </div>
           </div>
 
           <div className="additional-blog-card">
             <div className="additional-blog-image">
-              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Smart Investment" />
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower Investment" />
               <div className="blog-overlay-text">
                 <div className="blog-tag">BLOG</div>
-                <div className="blog-subtitle">Oasis Palm Tower - A Smart Investment Choice</div>
+                <div className="blog-subtitle">Oasis Palm Tower - A Smart Investment in Faisal Hills</div>
               </div>
             </div>
             <div className="additional-blog-content">
-              <h3>Oasis Palm Tower - A Smart Investment Choice</h3>
-              <p>If you're looking for a real estate opportunity that combines nature with luxury living, Oasis Palm Tower in the Galiyat region is the destination you've been searching for...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - A Smart Investment in Faisal Hills</h3>
+              <p>Invest in Oasis Palm Tower, located in Faisal Hills, Islamabad. This three-in-one development offers exceptional ROI opportunities with its unique combination of hotels, residential apartments, corporate offices, and commercial shops. Own a piece of prime real estate in Islamabad's fastest-growing area...</p>
             </div>
           </div>
         </div>
@@ -126,46 +119,43 @@ function Blogs() {
         <div className="new-blogs-container">
           <div className="new-blog-card">
             <div className="new-blog-image">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Modern Building" />
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower" />
               <div className="new-blog-overlay-text">
                 <div className="new-blog-tag">BLOG</div>
-                <div className="new-blog-subtitle">Why Choose Us - Oasis Palm Tower</div>
+                <div className="new-blog-subtitle">Why Choose Oasis Palm Tower in Faisal Hills</div>
               </div>
             </div>
             <div className="new-blog-content">
-              <h3>Why Choose Us – Oasis Palm Tower</h3>
-              <p>Oasis Palm Tower presents an exceptional investment opportunity in the Galiyat region of Ayubia, district of Abbottabad. Located just a short distance from major attractions...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Why Choose Oasis Palm Tower in Faisal Hills</h3>
+              <p>Oasis Palm Tower presents an exceptional opportunity in Faisal Hills, Islamabad. This three-in-one development combines luxury hotels, premium apartments, modern offices, and commercial shops. Located in one of Islamabad's prime areas with excellent connectivity and amenities...</p>
             </div>
           </div>
 
           <div className="new-blog-card">
             <div className="new-blog-image">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Mountain Landscape" />
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Faisal Hills Location" />
               <div className="new-blog-overlay-text">
                 <div className="new-blog-tag">BLOG</div>
-                <div className="new-blog-subtitle">Oasis Palm Tower - Nearby Tourist Attractions</div>
+                <div className="new-blog-subtitle">Oasis Palm Tower - Prime Location in Faisal Hills</div>
               </div>
             </div>
             <div className="new-blog-content">
-              <h3>Oasis Palm Tower - Nearby Tourist Attractions</h3>
-              <p>Oasis Palm Tower a project by Almaymaar is a beautiful escape towards the peace of Galiyat. Located just a short distance from major tourist destinations...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - Prime Location in Faisal Hills, Islamabad</h3>
+              <p>Oasis Palm Tower is strategically located in Faisal Hills, Islamabad - one of the city's most desirable and rapidly developing areas. With easy access to major landmarks, schools, parks, and business districts, this location offers unmatched convenience and value...</p>
             </div>
           </div>
 
           <div className="new-blog-card">
             <div className="new-blog-image">
-              <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Interior" />
+              <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower Features" />
               <div className="new-blog-overlay-text">
                 <div className="new-blog-tag">BLOG</div>
-                <div className="new-blog-subtitle">Top 5 reasons to choose Oasis Palm Tower</div>
+                <div className="new-blog-subtitle">Top 5 Reasons to Choose Oasis Palm Tower</div>
               </div>
             </div>
             <div className="new-blog-content">
-              <h3>Top 5 Reasons to choose Oasis Palm Tower</h3>
-              <p>Oasis Palm Tower, located in Ayubia, of the Galiyat region, Abbottabad district showcases some of the luxury living, setting an example of luxury living in the heart of nature...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Top 5 Reasons to Choose Oasis Palm Tower</h3>
+              <p>Oasis Palm Tower in Faisal Hills, Islamabad offers a unique three-in-one concept with hotels, apartments, offices, and shops. Discover why this development stands out with its prime location, modern amenities, excellent connectivity, and exceptional investment potential...</p>
             </div>
           </div>
         </div>
@@ -176,46 +166,43 @@ function Blogs() {
         <div className="final-blogs-container">
           <div className="final-blog-card">
             <div className="final-blog-image">
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Hiking in Mountains" />
+              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower" />
               <div className="final-blog-overlay-text">
                 <div className="final-blog-tag">BLOG</div>
-                <div className="final-blog-subtitle">Oasis Palm Tower - Your Ultimate Destination</div>
+                <div className="final-blog-subtitle">Oasis Palm Tower - Your Ultimate Destination in Faisal Hills</div>
               </div>
             </div>
             <div className="final-blog-content">
-              <h3>Oasis Palm Tower - Your Ultimate Destination</h3>
-              <p>Located in the heart of Galiyat, Oasis Palm Tower offers a unique living of combining luxury with comfort. Oasis Palm Tower represents a blend of luxury living combine...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - Your Ultimate Destination in Faisal Hills</h3>
+              <p>Located in Faisal Hills, Islamabad, Oasis Palm Tower offers a unique three-in-one lifestyle combining luxury hotels, premium apartments, modern offices, and commercial shops. Experience the perfect blend of residential comfort, business convenience, and commercial opportunities all in one prime location...</p>
             </div>
           </div>
 
           <div className="final-blog-card">
             <div className="final-blog-image">
-              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Modern Building in Forest" />
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower Investment" />
               <div className="final-blog-overlay-text">
                 <div className="final-blog-tag">BLOG</div>
-                <div className="final-blog-subtitle">ROI Opportunities - Oasis Palm Tower</div>
+                <div className="final-blog-subtitle">ROI Opportunities at Oasis Palm Tower</div>
               </div>
             </div>
             <div className="final-blog-content">
-              <h3>ROI Opportunities - Oasis Palm Tower</h3>
-              <p>Oasis Palm Tower, located in the peaceful environment in the majestic hills of Galiyat region of the Abbottabad District. Oasis Palm Tower wh...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>ROI Opportunities at Oasis Palm Tower</h3>
+              <p>Oasis Palm Tower in Faisal Hills, Islamabad presents exceptional ROI opportunities. With its unique three-in-one concept featuring hotels, apartments, offices, and shops, investors can benefit from multiple revenue streams in one prime location...</p>
             </div>
           </div>
 
           <div className="final-blog-card">
             <div className="final-blog-image">
-              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Interior" />
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Oasis Palm Tower Luxury" />
               <div className="final-blog-overlay-text">
                 <div className="final-blog-tag">BLOG</div>
-                <div className="final-blog-subtitle">Oasis Palm Tower - Luxury Redefined</div>
+                <div className="final-blog-subtitle">Oasis Palm Tower - Luxury Redefined in Faisal Hills</div>
               </div>
             </div>
             <div className="final-blog-content">
-              <h3>Oasis Palm Tower - Luxury Redefined</h3>
-              <p>Oasis Palm Tower, a project by Almaymaar is located in the serene hills of Galiyat, the Abbottabad District in the province of Khyber Pakhtunkhwa. Thi...</p>
-              <a href="#" className="read-more">Read more</a>
+              <h3>Oasis Palm Tower - Luxury Redefined in Faisal Hills</h3>
+              <p>Oasis Palm Tower, developed by Taiba Developers, is located in Faisal Hills, Islamabad. This three-in-one development redefines luxury living with its combination of hotels, premium apartments, modern offices, and commercial shops, all designed with elegance and attention to detail...</p>
             </div>
           </div>
         </div>

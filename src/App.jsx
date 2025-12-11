@@ -1,63 +1,439 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import './App.css';
+import './pages/About.css';
+import './pages/DownPayment.css';
+import './pages/Developer.css';
 
 function App() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const location = useLocation();
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [registerForm, setRegisterForm] = useState({
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    comment: ''
+  });
 
-  const handleWatchVideoClick = () => {
-    setIsVideoPlaying(true);
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    console.log('Register Request:', registerForm);
+    setShowRegisterModal(false);
+    setRegisterForm({
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      comment: ''
+    });
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setRegisterForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const scrollToSection = useCallback((sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Use scrollIntoView for reliable scrolling
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+      
+      // Add animate class after a short delay to trigger animations (for navbar clicks)
+      setTimeout(() => {
+        element.classList.add('animate');
+        // Trigger a scroll event to update active section
+        window.dispatchEvent(new Event('scroll'));
+      }, 100);
+    }
+  }, []);
+
+  // Handle section visibility and animations on scroll
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -20% 0px',
+      threshold: 0.3
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections
+    const sections = ['home', 'about', 'features', 'developer'];
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
+
+
+  // Handle hash navigation on page load
+  useEffect(() => {
+    const hash = window.location.hash.substring(1); // Remove the #
+    if (hash) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        scrollToSection(hash);
+      }, 100);
+    }
+  }, []);
+
+  // Handle navigation state (when navigating from other pages like Blogs)
+  useEffect(() => {
+    if (location.state && location.state.scrollTo) {
+      const sectionId = location.state.scrollTo;
+      // Wait for DOM to be ready, then scroll
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 200);
+    }
+  }, [location.state, scrollToSection]);
 
   
   return (
     <div className="app">
-      <Navbar onWatchVideoClick={handleWatchVideoClick} />
+      <Navbar scrollToSection={scrollToSection} />
       
-      {/* Background Image/Video */}
-      <div className="video-container">
-        {isVideoPlaying ? (
+      {/* Fixed Get in Touch Button - From Home Page */}
+      <button 
+        className="cta-button fixed-cta-button"
+        onClick={() => setShowRegisterModal(true)}
+      >
+        Get in Touch
+      </button>
+      
+      {/* Fixed Action Buttons - From Home Page */}
+      <div className="contact-icons">
+        <a 
+          href="https://maps.app.goo.gl/WMjzyJq1Fpoy4zwL7?g_st=ic" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="contact-icon directions-icon"
+          title="Get Directions"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+          </svg>
+        </a>
+        <button 
+          className="contact-icon register-icon"
+          onClick={() => setShowRegisterModal(true)}
+          title="Register Request"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      
+      {/* Home Section */}
+      <section id="home" className="home-section">
+        {/* Background Video */}
+        <div className="video-container">
           <video 
             autoPlay 
             muted 
             loop 
             playsInline
+            preload="auto"
             className="background-video"
-            onEnded={() => setIsVideoPlaying(false)}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
+            onLoadedData={(e) => {
+              // Ensure video plays at highest quality
+              if (e.target) {
+                e.target.playbackRate = 1.0;
+              }
+            }}
           >
             <source src="/oasis-palm-tower.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        ) : null}
-        <div className="video-overlay"></div>
-      </div>
+          <div className="video-overlay"></div>
+        </div>
 
-      {/* Hero Section */}
-      <div className="hero-section">
-        <div className="hero-content">
-              <h1 className="hero-title">
-                OASIS PALM TOWER - Luxury in the Heart of Galiyat
-              </h1>
-          <p className="hero-subtitle">
-            A Mountain-Front Investment Promising Up to 25% Annual ROI
-          </p>
-          <button className="cta-button">Get in Touch</button>
+        {/* Hero Section */}
+        <div className="hero-section">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              OASIS PALM TOWER
+            </h1>
+            <p className="hero-subtitle">
+              A Mountain-Front Investment Promising Up to 25% Annual ROI
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Contact Icons */}
-      <div className="contact-icons">
-        <div className="contact-icon phone-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7293C21.7209 20.9844 21.5573 21.2136 21.3521 21.4019C21.1469 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59531 1.99522 8.06612 2.16708 8.43376 2.48353C8.8014 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z" fill="currentColor"/>
-          </svg>
+      {/* About Section */}
+      <section id="about" className="about-page">
+        <div className="about-background"></div>
+        <div className="about-section">
+          <div className="about-content">
+            <h1 className="about-title">Oasis Palm Tower</h1>
+            <h2 className="about-subtitle">A LUXURY DEVELOPMENT IN FAISAL HILLS, ISLAMABAD</h2>
+            
+            <div className="about-text">
+              <p className="about-paragraph">
+                Oasis Palm Tower is a unique luxury development located in Faisal Hills, Islamabad, combining luxury hotels, premium apartments, modern corporate offices, and ground floor commercial shops in one magnificent building. Developed by Taiba Developers under the leadership of Ch. Waqas Shafique, this complete lifestyle plaza offers rooftop amenities including a swimming pool, restaurant, modern gym & gaming zone, 24/7 security, dedicated parking, and power backup. Strategically located near Roots International School, Arc Monument, Glow Park, and other key facilities, Oasis Palm Tower represents a trusted name in real estate, delivering quality construction and lasting value for residents, businesses, and investors.
+              </p>
+            </div>
+            
+          </div>
         </div>
-        <div className="contact-icon whatsapp-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" fill="currentColor"/>
-          </svg>
+      </section>
+
+      {/* Show Features Section */}
+      <section id="features" className="down-payment-page">
+        <div className="down-payment-background"></div>
+        <div className="grid-section">
+          <div className="grid-title">
+            <h2 className="grid-main-title">Oasis Palm Tower?</h2>
+          </div>
+          <div className="features-grid">
+            <div className="feature-column">
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 2L8 8V20C8 28.5 20 38 20 38S32 28.5 32 20V8L20 2Z" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <path d="M15 20L18 23L25 16" stroke="#C0A268" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="feature-text gda-approved-text">GDA APPROVED</div>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L12 12H28L20 6Z" fill="#C0A268"/>
+                    <path d="M20 14L8 22H32L20 14Z" fill="#C0A268"/>
+                    <path d="M20 24L4 32H36L20 24Z" fill="#C0A268"/>
+                    <rect x="17" y="32" width="6" height="6" fill="#C0A268"/>
+                  </svg>
+                </div>
+                <div className="feature-text forestry-approved-text">APPROVED BY FORESTRY AND WILDLIFE DEPARTMENTS</div>
+              </div>
+            </div>
+            
+            <div className="column-divider"></div>
+            
+            <div className="feature-column">
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="12" width="28" height="20" rx="3" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <line x1="8" y1="18" x2="32" y2="18" stroke="#C0A268" strokeWidth="2"/>
+                  </svg>
+                </div>
+                <div className="feature-text flexible-payment-text">FLEXIBLE PAYMENT PLANS</div>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="12" width="24" height="20" rx="2" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <rect x="10" y="8" width="4" height="4" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <rect x="26" y="8" width="4" height="4" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <circle cx="24" cy="22" r="4" stroke="#C0A268" strokeWidth="1.5" fill="none"/>
+                    <line x1="24" y1="22" x2="24" y2="20" stroke="#C0A268" strokeWidth="1.5" strokeLinecap="round"/>
+                    <line x1="24" y1="22" x2="26" y2="22" stroke="#C0A268" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <div className="feature-text installment-plan-text">EASY 4-YEAR INSTALLMENT PLAN</div>
+              </div>
+            </div>
+            
+            <div className="column-divider"></div>
+            
+            <div className="feature-column">
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="8" width="24" height="24" stroke="#C0A268" strokeWidth="1.5" fill="none"/>
+                    <line x1="10" y1="28" x2="30" y2="12" stroke="#C0A268" strokeWidth="2" strokeLinecap="round"/>
+                    <circle cx="10" cy="28" r="1.5" fill="#C0A268"/>
+                    <circle cx="30" cy="12" r="1.5" fill="#C0A268"/>
+                  </svg>
+                </div>
+                <div className="feature-text-large">25%</div>
+                <div className="feature-text-small roi-text">ROI</div>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6C20 6 12 14 12 20C12 26 16 30 20 30C24 30 28 26 28 20C28 14 20 6 20 6Z" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <circle cx="20" cy="20" r="3" stroke="#C0A268" strokeWidth="1.5" fill="none"/>
+                  </svg>
+                </div>
+                <div className="feature-text-large">10 MIN</div>
+                <div className="feature-text-small nathia-gali-text">DRIVE FROM NATHIA GALI</div>
+              </div>
+            </div>
+            
+            <div className="column-divider"></div>
+            
+            <div className="feature-column">
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="20" y="30" textAnchor="middle" fontSize="32" fontWeight="900" fill="#C0A268" fontFamily="Arial, sans-serif">$</text>
+                  </svg>
+                </div>
+                <div className="feature-text-large">15%</div>
+                <div className="feature-text-small initial-downpayment-text">INITIAL DOWNPAYMENT</div>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 8L32 8L32 24L20 32L8 24L8 8Z" stroke="#C0A268" strokeWidth="2" fill="none"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#C0A268"/>
+                  </svg>
+                </div>
+                <div className="feature-text limited-discounts-text">LIMITED TIME DISCOUNTS</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Developer Section */}
+      <section id="developer" className="developer-page">
+        <div className="developer-background"></div>
+        <div className="developer-section">
+          <div className="developer-content">
+            <h1 className="developer-title">Developer</h1>
+            
+            <div className="developer-logo">
+              <div className="logo-diamond"></div>
+              <h2 className="company-name">Ch. Waqas Shafique</h2>
+              <div className="logo-underline"></div>
+            </div>
+            
+            <div className="developer-text">
+              <p className="developer-paragraph">
+                Ch. Waqas Shafique is the Founder and CEO of Taiba Developers, and the visionary behind Oasis Palm Tower. Starting from Sadiqabad, he has built a strong reputation through successful residential and commercial projects in Sadiqabad and Rahim Yar Khan, earning trust through hard work, honesty, and quality construction. Beyond real estate, he owns one of the largest iron and steel businesses in the region, ensuring premium-grade materials for every project. Under his leadership, Oasis Palm Tower brings modern luxury living to Faisal Hills, Islamabad, reflecting class, innovation, and lasting value. With plans for a new high-rise project in 2026, Taiba Developers continues to set standards for modern architecture and lifestyle excellence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer scrollToSection={scrollToSection} />
+
+      {/* Register Request Modal */}
+      {showRegisterModal && (
+        <div className="register-modal-overlay" onClick={() => setShowRegisterModal(false)}>
+          <div className="register-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="register-modal-header">
+              <h2 className="register-modal-title">Register Request</h2>
+              <button 
+                className="register-modal-close" 
+                onClick={() => setShowRegisterModal(false)}
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <form className="register-form" onSubmit={handleRegisterSubmit}>
+              <div className="register-form-group">
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={registerForm.firstName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="register-form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={registerForm.lastName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="register-form-group">
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <div className="phone-input-wrapper">
+                  <div className="phone-country-code">
+                    <span className="phone-flag">🇵🇰</span>
+                    <span className="phone-code">+92</span>
+                  </div>
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={registerForm.phoneNumber}
+                    onChange={handleInputChange}
+                    placeholder="300 1234567"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="register-form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={registerForm.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="register-form-group">
+                <label htmlFor="comment">Comment</label>
+                <textarea
+                  id="comment"
+                  name="comment"
+                  value={registerForm.comment}
+                  onChange={handleInputChange}
+                  rows="4"
+                />
+              </div>
+              <button type="submit" className="register-submit-btn">Submit</button>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );
