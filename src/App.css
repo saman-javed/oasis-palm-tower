@@ -18,7 +18,7 @@ html, body {
   overflow-x: hidden;
   scroll-snap-type: y mandatory; /* Enable scroll snapping */
   scroll-behavior: smooth; /* Smooth scrolling */
-  background: linear-gradient(to right, #C0A268 0%, #000000 40%, #000000 60%, #C0A268 100%);
+  background: #000000;
 }
 
 /* Section Styling */
