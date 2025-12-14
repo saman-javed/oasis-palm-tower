@@ -24,6 +24,7 @@ import parkingImg from '../assets/emm-parking.png';
 import gymImg from '../assets/emm-gym.png';
 import poolImg from '../assets/emm-pool.png';
 import gamingImg from '../assets/emm-gaming.png';
+import logo from '../assets/logo1.png';
 
 const ExplorePlan = () => {
   const navigate = useNavigate();
@@ -389,6 +390,7 @@ const ExplorePlan = () => {
               <h2 className="office-brand-sub">PALM TOWER</h2>
               <div className="office-brand-line"></div>
             </div>
+            {/* <img src={logo} alt="Oasis Palm Tower" className="navbar-logo-img" /> */}
 
             {/* Apartment Selector */}
             <div className="office-selector">

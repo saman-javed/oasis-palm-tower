@@ -188,7 +188,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   position: relative;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -204,17 +204,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.developer-text::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 20px;
-  background: #C0A268;
-  border-radius: 2px;
-}
+
 
 .developer-logo {
   font-family: 'Playfair Display', serif;

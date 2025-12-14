@@ -328,10 +328,10 @@
 }
 
 .office-plan-sidebar {
-  width: 320px;
-  min-width: 320px;
+  width: 240px;
+  min-width: 240px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, #000 100%);
-  padding: 25px 25px 15px 25px;
+  padding: 20px 18px 15px 18px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -593,7 +593,7 @@
   z-index: 1;
   height: 100vh;
   min-width: 0;
-  margin-left: 320px;
+  margin-left: 240px;
   transition: margin-left 0.3s ease;
 }
 
@@ -862,7 +862,6 @@
   left: 0;
   right: 0;
   height: 200px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -905,12 +904,12 @@
 /* Responsive for Office Plan */
 @media (max-width: 1024px) {
   .office-plan-sidebar {
-    width: 280px;
-    padding: 30px 20px;
+    width: 200px;
+    padding: 20px 15px;
   }
 
   .office-plan-main {
-    margin-left: 280px;
+    margin-left: 200px;
   }
 }
 

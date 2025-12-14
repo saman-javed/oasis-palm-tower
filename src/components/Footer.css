@@ -5,7 +5,7 @@
   background-size: 200% 200%;
   position: relative;
   color: #FFFFFF;
-  padding: 50px 40px 40px;
+  padding: 40px 40px 30px;
   font-family: 'Inter', sans-serif;
   position: relative;
   z-index: 10;
@@ -13,6 +13,11 @@
   margin: 0;
   box-sizing: border-box;
   overflow: hidden;
+  height: 50vh; /* Half viewport height - when scrolled, bottom of developer shows above */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  scroll-snap-align: start; /* Snap to footer - shows bottom of developer above it */
 }
 
 /* 3D Gold Effect */

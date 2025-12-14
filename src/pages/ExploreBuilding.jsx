@@ -6,6 +6,7 @@ import parkingImg from '../assets/emm-parking.png';
 import gymImg from '../assets/emm-gym.png';
 import poolImg from '../assets/emm-pool.png';
 import gamingImg from '../assets/emm-gaming.png';
+import logo from '../assets/logo1.png';
 
 // Amenities data
 const amenities = [
@@ -208,12 +209,13 @@ const ExploreBuilding = () => {
       {/* Top Left Controls */}
       <div className="top-left-controls">
         <div className="building-title">
-          <div className="building-title-main">OASIS</div>
+          {/* <div className="building-title-main">OASIS</div>
           <div className="building-title-sub">
             <span className="title-line-left"></span>
             <span className="title-text">PALM TOWER</span>
             <span className="title-line-right"></span>
-          </div>
+          </div> */}
+          <img src={logo} alt="Oasis Palm Tower" className="navbar-logo-img" />
         </div>
       </div>
 

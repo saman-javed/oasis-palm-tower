@@ -7,14 +7,17 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
+  overflow: hidden; /* Prevent body scrolling - .app will handle it */
 }
 
 .app {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh; /* NOT min-height - required for scroll container */
+  overflow-y: scroll; /* THIS IS KEY - makes .app the scroll container */
   overflow-x: hidden;
+  scroll-snap-type: y mandatory; /* Enable scroll snapping */
+  scroll-behavior: smooth; /* Smooth scrolling */
   background: linear-gradient(to right, #C0A268 0%, #000000 40%, #000000 60%, #C0A268 100%);
 }
 
@@ -26,6 +29,7 @@ section {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-snap-align: start; /* Snap each section to start */
 }
 
 .home-section {
@@ -38,54 +42,21 @@ section {
 /* Background Video */
 .video-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  inset: 0;
   overflow: hidden;
-  /* Optimize for video rendering */
-  will-change: contents;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  /* Prevent layout shifts */
-  contain: layout style paint;
+  z-index: 1;
 }
 
 .background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-  z-index: 1;
-  background: #000000;
-  /* Hardware acceleration for smooth playback */
   will-change: transform;
   transform: translateZ(0);
-  -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* Enhanced video clarity */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Smooth video rendering */
-  -webkit-perspective: 1000;
-  perspective: 1000;
-  /* Improve video quality rendering - subtle enhancement */
-  -webkit-filter: contrast(1.05) brightness(1.02) saturate(1.05);
-  filter: contrast(1.05) brightness(1.02) saturate(1.05);
-  /* Smooth transitions */
-  transition: filter 0.3s ease;
-  /* Prevent video stuttering */
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  /* Optimize rendering performance */
-  -webkit-optimize-contrast: optimizeQuality;
-  /* Force smooth playback */
-  -webkit-tap-highlight-color: transparent;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
 }
 
 .video-overlay {
@@ -113,11 +84,24 @@ section {
 /* Hero Section */
 .hero-section {
   position: absolute;
-  bottom: 10%;
+  bottom: calc(0.5% + 70px);
   left: 5%;
   z-index: 10;
   max-width: 600px;
   text-align: left;
+}
+
+/* Hero Logo Section */
+.hero-logo-section {
+  margin-bottom: 25px;
+  width: fit-content;
+}
+
+.hero-logo-img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 .hero-content {
@@ -131,7 +115,7 @@ section {
   font-size: 2.5rem;
   font-weight: 900;
   line-height: 1.1;
-  margin: 0 0 3px 0;
+  margin: 0 0 15px 0;
   color: rgb(0, 0, 0);
   text-shadow: 2px 0px 4px rgba(194, 166, 110, 0.744);
   text-align: left;
@@ -148,6 +132,7 @@ section {
 
 .hero-subtitle {
   margin-top: 0px;
+  margin-bottom: 0px;
   /* font-family: 'Montserrat', sans-serif; */
   /* font-size: 1.2rem; */
   font-weight: 600;
@@ -205,16 +190,14 @@ section {
   position: fixed;
   right: 30px;
   bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   z-index: 999;
+  width: auto;
+  height: auto;
 }
 
-
 .contact-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: #000000;
   border: 1px solid #C0A268;
   border-radius: 50%;
@@ -222,66 +205,163 @@ section {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
   color: #C0A268;
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0;
+  outline: none;
+  min-width: 36px;
+  max-width: 165px;
+}
+
+.contact-icon.directions-icon {
+  bottom: 0;
+}
+
+.contact-icon.register-icon {
+  bottom: 57px;
 }
 
 .contact-icon:hover {
+  width: 180px !important;
+  min-width: 180px;
+  max-width: 180px;
   background: #C0A268;
   color: #000000;
-  transform: scale(1.1);
+  justify-content: flex-start;
+  padding-left: 12px;
+  padding-right: 18px;
   box-shadow: 0 6px 20px rgba(192, 162, 104, 0.5);
+  border-radius: 50px;
 }
 
 .contact-icon svg {
   color: #C0A268;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
-.contact-icon a {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+.contact-icon:hover svg {
+  color: #000000;
+  margin-right: 10px;
+}
+
+.contact-icon-text {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.1s;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.contact-icon:hover .contact-icon-text {
+  opacity: 1;
+  max-width: 120px;
 }
 
 /* Scroll Indicators */
 .scroll-indicators {
-  position: absolute;
+  position: fixed;
   right: 30px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  z-index: 10;
+  z-index: 1000;
   align-items: center;
 }
 
 .scroll-dot {
-  width: 12px;
-  height: 8px;
-  background: #333333;
-  border: 1px solid #C0A268;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  padding: 0;
+  margin: 0;
+  outline: none;
 }
 
 .scroll-dot.active {
-  background: #C0A268;
-  border: 1px solid #C0A268;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 1);
   transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .scroll-dot:hover {
-  background: #C0A268 !important;
-  border: 1px solid #C0A268 !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  transform: scale(1.1);
+}
+
+/* Navigation Arrows */
+.navigation-arrows {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+  align-items: center;
+}
+
+.nav-arrow {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0;
+  margin: 0;
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+
+.nav-arrow:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.nav-arrow:active:not(.disabled) {
+  transform: scale(0.95);
+}
+
+.nav-arrow.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.nav-arrow svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* Down Payment Button */
@@ -454,6 +534,10 @@ section {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
+  .hero-logo-img {
+    width: 110px;
+  }
+  
   .hero-title {
     font-size: 2.2rem;
   }
@@ -464,6 +548,14 @@ section {
 }
 
 @media (max-width: 1000px) {
+  .hero-logo-section {
+    margin-bottom: 20px;
+  }
+  
+  .hero-logo-img {
+    width: 100px;
+  }
+  
   .hero-title {
     font-size: 2rem;
   }
@@ -478,6 +570,14 @@ section {
 }
 
 @media (max-width: 910px) {
+  .hero-logo-section {
+    margin-bottom: 18px;
+  }
+  
+  .hero-logo-img {
+    width: 90px;
+  }
+  
   .hero-title {
     font-size: 1.8rem;
   }
@@ -494,21 +594,28 @@ section {
 @media (max-width: 1024px) {
   .app {
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll; /* Keep scroll for snap to work */
+    height: 100vh; /* Keep fixed height for snap */
   }
   
   .hero-section {
-    position: relative;
-    top: auto;
-    left: auto;
+    position: absolute;
+    bottom: calc(0.5% + 70px);
+    left: 5%;
+    width: calc(100% - 10%);
+    max-width: 600px;
+    padding: 0;
+    margin: 0;
+    display: block;
     transform: none;
-    width: 100%;
-    padding: 40px 100px 40px 40px; /* Added right padding for dots */
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  }
+  
+  .hero-logo-section {
+    margin-bottom: 15px;
+  }
+  
+  .hero-logo-img {
+    width: 80px;
   }
   
   .hero-title {
@@ -526,6 +633,11 @@ section {
     gap: 12px;
   }
   
+  .navigation-arrows {
+    left: 25px;
+    gap: 18px;
+  }
+  
   .contact-icons {
     right: 25px;
     bottom: 25px;
@@ -533,27 +645,68 @@ section {
   
 }
 
+@media (max-width: 1240px) {
+  .contact-icons {
+    right: 25px;
+    bottom: 25px;
+  }
+  
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
+  }
+  
+  .contact-icon:hover {
+    width: 160px !important;
+    min-width: 160px;
+    max-width: 160px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 115px;
+  }
+  
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 @media (max-width: 768px) {
   .app {
     overflow-x: hidden;
-    overflow-y: auto;
-    min-height: 100vh;
-    height: auto;
+    overflow-y: scroll; /* Keep scroll for snap to work */
+    height: 100vh; /* Keep fixed height for snap - NOT auto */
   }
   
   
   .hero-section {
-    position: relative;
-    top: auto;
-    left: auto;
+    position: absolute;
+    bottom: calc(0.5% + 70px);
+    left: 5%;
+    width: calc(100% - 10%);
+    max-width: 600px;
+    padding: 0;
+    margin: 0;
+    display: block;
     transform: none;
-    width: 100%;
-    padding: 30px 80px 30px 30px; /* Added right padding for dots */
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  }
+  
+  .hero-logo-section {
+    margin-bottom: 12px;
+  }
+  
+  .hero-logo-img {
+    width: 70px;
   }
   
   .hero-title {
@@ -584,13 +737,52 @@ section {
   }
   
   .contact-icon {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
+  }
+  
+  .contact-icon:hover {
+    width: 145px !important;
+    min-width: 145px;
+    max-width: 145px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 110px;
+  }
+  
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
   }
   
   .scroll-indicators {
     right: 20px;
     gap: 10px;
+  }
+  
+  .navigation-arrows {
+    left: 20px;
+    gap: 15px;
+  }
+  
+  .nav-arrow {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .nav-arrow svg {
+    width: 18px;
+    height: 18px;
   }
   
   .down-payment-btn {
@@ -600,27 +792,116 @@ section {
   }
 }
 
+@media (max-width: 740px) {
+  .contact-icons {
+    right: 18px;
+    bottom: 18px;
+  }
+  
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 54px;
+  }
+  
+  .contact-icon:hover {
+    width: 140px !important;
+    min-width: 140px;
+    max-width: 140px;
+    border-radius: 18px;
+    padding-left: 11px;
+    padding-right: 16px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 105px;
+  }
+  
+  .contact-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  
+  .contact-icon-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 615px) {
+  .contact-icons {
+    right: 15px;
+    bottom: 10px;
+  }
+  
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 54px;
+  }
+  
+  .contact-icon:hover {
+    width: 140px !important;
+    min-width: 140px;
+    max-width: 140px;
+    border-radius: 18px;
+    padding-left: 11px;
+    padding-right: 16px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 105px;
+  }
+  
+  .contact-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  
+  .contact-icon-text {
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 480px) {
   .app {
     overflow-x: hidden;
-    overflow-y: auto;
-    min-height: 100vh;
-    height: auto;
+    overflow-y: scroll; /* Keep scroll for snap to work */
+    height: 100vh; /* Keep fixed height for snap - NOT auto */
   }
   
   
   .hero-section {
-    position: relative;
-    top: auto;
-    left: auto;
+    position: absolute;
+    bottom: calc(0.5% + 70px);
+    left: 5%;
+    width: calc(100% - 10%);
+    max-width: 600px;
+    padding: 0;
+    margin: 0;
+    display: block;
     transform: none;
-    width: 100%;
-    padding: 20px 60px 20px 20px; /* Added right padding for dots */
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  }
+  
+  .hero-logo-section {
+    margin-bottom: 10px;
+  }
+  
+  .hero-logo-img {
+    width: 60px;
   }
   
   .hero-title {
@@ -638,6 +919,16 @@ section {
     line-height: 1.4;
     margin-bottom: 25px;
   }
+}
+
+@media (max-width: 450px) {
+  .hero-subtitle {
+    display: none;
+  }
+  
+  .hero-title {
+    margin-bottom: 0;
+  }
   
   .cta-button {
     padding: 12px 25px;
@@ -651,13 +942,52 @@ section {
   }
   
   .contact-icon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 55px;
+  }
+  
+  .contact-icon:hover {
+    width: 135px !important;
+    min-width: 135px;
+    max-width: 135px;
+    border-radius: 18px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 100px;
+  }
+  
+  .contact-icon svg {
+    width: 17px;
+    height: 17px;
   }
   
   .scroll-indicators {
     right: 15px;
     gap: 8px;
+  }
+  
+  .navigation-arrows {
+    left: 15px;
+    gap: 12px;
+  }
+  
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .nav-arrow svg {
+    width: 16px;
+    height: 16px;
   }
 
   .down-payment-btn {
@@ -669,11 +999,26 @@ section {
 
 @media (max-width: 360px) {
   .hero-section {
-    padding: 15px 50px 15px 15px; /* Adjusted right padding */
+    bottom: calc(0.5% + 60px);
+    left: 5%;
+    width: calc(100% - 10%);
+    padding: 0;
+  }
+  
+  .hero-logo-section {
+    margin-bottom: 8px;
+  }
+  
+  .hero-logo-img {
+    width: 55px;
   }
   
   .hero-title {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
+  }
+  
+  .hero-title .brand-name {
+    font-size: 1.5rem;
   }
   
   .hero-subtitle {
@@ -690,14 +1035,59 @@ section {
     gap: 6px;
   }
   
+  .navigation-arrows {
+    left: 10px;
+    gap: 10px;
+  }
+  
+  .nav-arrow {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .nav-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+  
   .contact-icons {
     right: 10px;
     bottom: 10px;
   }
   
   .contact-icon {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 47px;
+  }
+  
+  .contact-icon:hover {
+    width: 125px !important;
+    min-width: 125px;
+    max-width: 125px;
+    border-radius: 16px;
+    padding-left: 10px;
+    padding-right: 14px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 95px;
+  }
+  
+  .contact-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .contact-icon-text {
+    font-size: 11px;
   }
   
   .down-payment-btn {

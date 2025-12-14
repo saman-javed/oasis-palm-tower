@@ -163,20 +163,20 @@ const apartment4thFloorUnits = [
 const apartment5thFloorUnits = [
   // Left side apartments
 //   { id: 'apt-5-1', name: 'Apartment 1', area: '1200 SFT', points: '60,-70 300,-70 300,540 60,540' },
-  { id: 'apt-5-2', name: 'Apartment 1', area: '1150 SFT', bedCount: 3, points: '60,-70 440,-70 440,160 450,160 450,540 60,540' },
-  { id: 'apt-5-3', name: 'Apartment 2', area: '1100 SFT', bedCount: 2, points: '440,-70 610,-70 610,170 700,170 700,540 450,540 450,170 440,180 440,-70' },
-  { id: 'apt-5-4', name: 'Apartment 3', area: '1250 SFT', bedCount: 2, points: '1090,-70 900,-70 900,170 810,170 810,540 1060,540 1060,170 1075,170 1075,-70' },
+  { id: 'apt-5-2', name: 'Apartment 1', area: '1310 SFT', bedCount: 3, points: '60,-70 440,-70 440,160 450,160 450,540 60,540' },
+  { id: 'apt-5-3', name: 'Apartment 2', area: '720 SFT', bedCount: 2, points: '440,-70 610,-70 610,170 700,170 700,540 450,540 450,170 440,180 440,-70' },
+  { id: 'apt-5-4', name: 'Apartment 3', area: '720 SFT', bedCount: 2, points: '1090,-70 900,-70 900,170 810,170 810,540 1060,540 1060,170 1075,170 1075,-70' },
   
   // Right side apartments
-  { id: 'apt-5-5', name: 'Apartment 4', area: '1180 SFT', bedCount: 3, points: '1440,-70 1070,-70 1070,170 1060,170 1060,540 1440,540' },
+  { id: 'apt-5-5', name: 'Apartment 4', area: '1310 SFT', bedCount: 3, points: '1440,-70 1070,-70 1070,170 1060,170 1060,540 1440,540' },
 //   { id: 'apt-5-6', name: 'Apartment 6', area: '1120 SFT', points: '1440,-70 1210,-70 1210,540 1440,540' },
-  { id: 'apt-5-7', name: 'Apartment 5', area: '1300 SFT', bedCount: 2, points: '60,660 410,660 410,1150 60,1150' },
+  { id: 'apt-5-7', name: 'Apartment 5', area: '950 SFT', bedCount: 2, points: '60,660 410,660 410,1150 60,1150' },
 //   { id: 'apt-5-8', name: 'Apartment 8', area: '1200 SFT', points: '240,650 410,650 410,1140 240,1140' },
-  { id: 'apt-2-9', name: 'Apartment 6', area: '1150 SFT', bedCount: 2, points: '410,660 750,660 750,1150 410,1150' },
+  { id: 'apt-2-9', name: 'Apartment 6', area: '930 SFT', bedCount: 2, points: '410,660 750,660 750,1150 410,1150' },
 //   { id: 'apt-2-10', name: 'Apartment 10', area: '1100 SFT', points:'580,650 750,650 750,1140 580,1140' },
-  { id: 'apt-2-11', name: 'Apartment 7', area: '1250 SFT', bedCount: 2, points: '750,660 1100,660 1100,1150 750,1150' },
+  { id: 'apt-2-11', name: 'Apartment 7', area: '930 SFT', bedCount: 2, points: '750,660 1100,660 1100,1150 750,1150' },
 //   { id: 'apt-2-12', name: 'Apartment 12', area: '1180 SFT', points: '920,650 1090,650 1090,1140 920,1140' },
-  { id: 'apt-2-13', name: 'Apartment 8', area: '1120 SFT', bedCount: 2, points: '1100,660 1440,660 1440,1150 1100,1150' },
+  { id: 'apt-2-13', name: 'Apartment 8', area: '950 SFT', bedCount: 2, points: '1100,660 1440,660 1440,1150 1100,1150' },
 //   { id: 'apt-2-14', name: 'Apartment 14', area: '1300 SFT', points: '1260,650 1430,650 1430,1140 1260,1140' },
 
 ];
@@ -691,6 +691,17 @@ const FloorDetail = () => {
           </div>
         </div>
       )}
+
+      {/* Bottom Left - Developer Info */}
+      <div className="floor-developer-info">
+        <div className="floor-developer-text">
+          <div className="floor-developer-prefix">A Project by</div>
+          <div className="floor-developer-name-wrapper">
+            <span className="floor-developer-diamond">◆</span>
+            <span className="floor-developer-name">TAIBA DEVELOPERS</span>
+          </div>
+        </div>
+      </div>
 
       {/* Register Request Modal */}
       {showRegisterModal && (

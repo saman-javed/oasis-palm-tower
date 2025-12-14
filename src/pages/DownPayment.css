@@ -348,8 +348,8 @@
 }
 
 .scroll-dot {
-  width: 12px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: #000000;
   border: 1px solid transparent;
   border-radius: 50%;
@@ -418,8 +418,9 @@
   }
   
   .feature-text {
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    word-wrap: break-word;
   }
 }
 
@@ -483,17 +484,18 @@
   }
   
   .feature-text {
-    font-size: 0.75rem;
-    line-height: 1.4;
+    font-size: 0.8rem;
+    line-height: 1.5;
     letter-spacing: 0.3px;
+    word-wrap: break-word;
   }
   
   .feature-text-large {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   
   .feature-text-small {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
   
   .action-buttons {
@@ -524,19 +526,23 @@
 @media (max-width: 640px) {
   .grid-section {
     width: 100%;
-    padding: 15px 50px 15px 15px;
+    padding: 20px 15px 20px 15px;
     top: 110px;
     min-height: calc(100vh - 110px);
+    justify-content: center;
+    align-items: center;
   }
   
   .grid-main-title {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     margin-bottom: 20px;
     letter-spacing: 0.3px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .features-grid {
-    padding: 0 15px 15px 15px;
+    padding: 0 10px 15px 10px;
     gap: 15px;
   }
   
@@ -545,31 +551,32 @@
   }
   
   .feature-item {
-    padding: 12px 6px;
+    padding: 15px 8px;
   }
   
   .feature-icon {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
   }
   
   .feature-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
   }
   
   .feature-text {
-    font-size: 0.7rem;
-    line-height: 1.3;
-    letter-spacing: 0.2px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    word-wrap: break-word;
   }
   
   .feature-text-large {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
   }
   
   .feature-text-small {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
   
   .action-buttons {
@@ -586,27 +593,6 @@
   .action-btn svg {
     width: 18px;
     height: 18px;
-  }
-  
-  .features-grid {
-    padding: 0 15px 15px 15px;
-    gap: 15px;
-  }
-  
-  .feature-item {
-    padding: 12px 8px;
-  }
-  
-  .feature-text {
-    font-size: 0.75rem;
-  }
-  
-  .feature-text-large {
-    font-size: 1.1rem;
-  }
-  
-  .feature-text-small {
-    font-size: 0.65rem;
   }
   
   .contact-icons {
@@ -631,27 +617,32 @@
   }
   
   .scroll-dot {
-    width: 8px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
   }
 }
 
 @media (max-width: 480px) {
   .grid-section {
     width: 100%;
-    padding: 12px 50px 12px 12px;
+    padding: 90px 12px 25px 12px;
     top: 100px;
     min-height: calc(100vh - 100px);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
   }
   
   .grid-main-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 18px;
     letter-spacing: 0.2px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .features-grid {
-    padding: 0 12px 12px 12px;
+    padding: 0 8px 12px 8px;
     gap: 12px;
   }
   
@@ -660,31 +651,32 @@
   }
   
   .feature-item {
-    padding: 10px 5px;
+    padding: 12px 6px;
   }
   
   .feature-icon {
-    font-size: 1.2rem;
-    margin-bottom: 6px;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
   }
   
   .feature-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
   
   .feature-text {
-    font-size: 0.65rem;
-    line-height: 1.3;
-    letter-spacing: 0.1px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    word-wrap: break-word;
   }
   
   .feature-text-large {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
   }
   
   .feature-text-small {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
   }
   
   .action-buttons {
@@ -716,27 +708,6 @@
     font-size: 1.25rem;
   }
   
-  .features-grid {
-    padding: 0 10px 10px 10px;
-    gap: 10px;
-  }
-  
-  .feature-item {
-    padding: 10px 5px;
-  }
-  
-  .feature-text {
-    font-size: 0.7rem;
-  }
-  
-  .feature-text-large {
-    font-size: 1rem;
-  }
-  
-  .feature-text-small {
-    font-size: 0.6rem;
-  }
-  
   .contact-icons {
     right: 10px;
     bottom: 10px;
@@ -760,25 +731,30 @@
   
   .scroll-dot {
     width: 6px;
-    height: 4px;
+    height: 6px;
   }
 }
 
 @media (max-width: 360px) {
   .grid-section {
-    padding: 10px 45px 10px 10px;
+    width: 100%;
+    padding: 15px 10px 15px 10px;
     top: 90px;
     min-height: calc(100vh - 90px);
+    justify-content: center;
+    align-items: center;
   }
   
   .grid-main-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 15px;
     letter-spacing: 0.1px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .features-grid {
-    padding: 0 10px 10px 10px;
+    padding: 0 8px 10px 8px;
     gap: 10px;
   }
   
@@ -787,31 +763,32 @@
   }
   
   .feature-item {
-    padding: 8px 4px;
+    padding: 10px 5px;
   }
   
   .feature-icon {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
   }
   
   .feature-icon svg {
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
   }
   
   .feature-text {
-    font-size: 0.6rem;
-    line-height: 1.2;
-    letter-spacing: 0.1px;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    letter-spacing: 0.15px;
+    word-wrap: break-word;
   }
   
   .feature-text-large {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
   }
   
   .feature-text-small {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
   
   .action-buttons {
@@ -886,8 +863,8 @@
   }
   
   .scroll-dot {
-    width: 5px;
-    height: 3px;
+    width: 6px;
+    height: 6px;
   }
 }
 

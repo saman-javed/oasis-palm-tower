@@ -5,7 +5,7 @@ function About() {
   return (
     <div className="about-section">
       <div className="about-content">
-        <h1 className="about-title">Oasis Palm Tower</h1>
+        <h1 className="about-title">VISION</h1>
         <h2 className="about-subtitle">A NEW PARADIGM OF LUXURY LIVING IN ISLAMABAD</h2>
         
         <div className="about-text">

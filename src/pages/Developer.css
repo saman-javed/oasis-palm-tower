@@ -1,7 +1,7 @@
 .developer-page {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* Full viewport height - developer shows completely */
   overflow: hidden;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 10%, #3d2f1f 25%, #6b583f 40%, #C0A268 50%, #5a4a35 60%, #3d2f1f 75%, #2d2418 90%, #1a1a1a 100%);
   background-attachment: fixed;
@@ -69,37 +69,106 @@
 }
 
 /* Developer Section */
-  .developer-section {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    width: 90%;
-    max-width: 1000px;
-    text-align: center;
-    padding: 140px 20px 40px 20px;
-    box-sizing: border-box;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.developer-section {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 90%;
+  max-width: 1200px;
+  padding: 120px 40px 40px 40px;
+  box-sizing: border-box;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .developer-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
   color: #C0A268;
+}
+
+/* Left Side - Image Container */
+.developer-image-container {
+  flex: 0 0 25%;
+  max-width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.developer-image-placeholder {
+  width: 100%;
+  height: auto;
+}
+
+.developer-image {
+  width: 100%;
+  height: 0;
+  padding-bottom: 140%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(192, 162, 104, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%);
+  max-height: 600px;
+  margin: auto 0;
+}
+
+.developer-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Fallback if image doesn't load */
+.developer-image:has(img[src=""])::before,
+.developer-image:not(:has(img))::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(192, 162, 104, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right Side - Text Container */
+.developer-text-container {
+  flex: 0 0 55%;
+  max-width: 55%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .developer-title {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #000000;
-  margin: 0 0 20px 0;
-  line-height: 1.1;
+  margin: 0 0 25px 0;
+  line-height: 1.2;
   letter-spacing: 1px;
+  text-align: left;
   opacity: 0;
   transform: translateY(-30px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -125,28 +194,30 @@
   position: relative;
   display: inline-block;
   margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
 }
 
 .logo-diamond {
   position: absolute;
   top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 12px;
   height: 12px;
   background: #C0A268;
-  transform: translateX(-50%) rotate(45deg);
+  transform: rotate(45deg);
   z-index: 1;
 }
 
 .company-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
+  font-size: 1.7rem;
   font-weight: 500;
   color: #000000;
-  margin: 0 0 40px 0;
+  margin: 0 0 25px 0;
   line-height: 1.4;
   letter-spacing: 0.8px;
+  text-align: left;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
@@ -171,17 +242,16 @@
 .logo-underline {
   position: absolute;
   bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 60%;
   height: 2px;
   background: #C0A268;
 }
 
 .developer-text {
-  max-width: 800px;
-  margin: 0 auto 10px auto;
-  text-align: center;
+  max-width: 95%;
+  margin: 0 0 10px 0;
+  text-align: left;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
@@ -197,9 +267,9 @@
   font-size: 0.9rem;
   font-weight: 400;
   color: #000000;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0 0 15px 0;
-  text-align: center;
+  text-align: left;
   letter-spacing: 0;
   opacity: 0;
   transition: opacity 0.8s ease-out 0.6s;
@@ -304,8 +374,8 @@
 }
 
 .scroll-dot {
-  width: 12px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: #D2B48C;
   border: 1px solid transparent;
   border-radius: 50%;
@@ -326,16 +396,37 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-  .developer-title {
-    font-size: 3rem;
+  .developer-section {
+    width: 95%;
+    padding: 120px 30px 40px 30px;
   }
   
-  .company-name {
+  .developer-content {
+    gap: 50px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .developer-image-container {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+  
+  .developer-title {
     font-size: 2.2rem;
   }
   
+  .company-name {
+    font-size: 1.8rem;
+  }
+  
   .developer-paragraph {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     letter-spacing: 0;
   }
 }
@@ -344,51 +435,161 @@
   .developer-section {
     width: 95%;
     max-width: 900px;
-    padding: 140px 30px 40px 30px;
+    padding: 120px 30px 40px 30px;
+  }
+  
+  .developer-content {
+    gap: 40px;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .developer-image-container {
+    flex: 0 0 32%;
+    max-width: 32%;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 55%;
+    max-width: 55%;
   }
   
   .developer-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .company-name {
-    font-size: 2rem;
+    font-size: 1.6rem;
     letter-spacing: 0.6px;
   }
   
   .developer-text {
-    max-width: 700px;
+    max-width: 100%;
   }
   
   .developer-paragraph {
-    font-size: 0.9rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     letter-spacing: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .developer-section {
+    width: 95%;
+    max-width: 800px;
+    padding: 120px 30px 40px 30px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .developer-content {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .developer-image-container {
+    display: none;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .developer-title {
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 0 auto 25px auto;
+  }
+  
+  .company-name {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 0 auto 25px auto;
+  }
+  
+  .developer-text {
+    max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .developer-paragraph {
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0;
+    text-align: center;
+    margin: 0 auto 16px auto;
   }
 }
 
 @media (max-width: 800px) {
   .developer-section {
     width: 100%;
-    padding: 20px 60px 20px 20px;
-    top: 120px;
+    padding: 120px 20px 40px 20px;
+    top: 0;
+    justify-content: center;
+  }
+  
+  .developer-content {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .developer-image-container {
+    display: none;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .developer-title,
+  .company-name,
+  .developer-text,
+  .developer-paragraph {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .developer-title {
     font-size: 2.2rem;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
+    text-align: center;
   }
   
   .company-name {
     font-size: 1.8rem;
     margin-bottom: 30px;
     letter-spacing: 0.5px;
+    text-align: center;
   }
   
   .developer-text {
     max-width: 100%;
     margin-bottom: 30px;
+    text-align: center;
   }
   
   .developer-paragraph {
@@ -396,6 +597,7 @@
     line-height: 1.6;
     margin-bottom: 18px;
     letter-spacing: 0;
+    text-align: center;
   }
   
   .developer-cta-button {
@@ -406,7 +608,7 @@
 
 @media (max-width: 768px) {
   .developer-page {
-    height: 100vh;
+    height: 100vh; /* Full viewport height */
     overflow: hidden;
   }
   
@@ -418,15 +620,47 @@
     width: 100%;
     padding: 120px 20px 40px 20px;
     margin: 0 auto;
-    height: 100vh;
-    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    justify-content: flex-start;
     overflow: hidden;
+  }
+  
+  .developer-content {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .developer-image-container {
+    flex: 0 0 100%;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .developer-image {
+    padding-bottom: 140%;
+    max-width: 350px;
+    max-height: 500px;
+    margin: 0 auto;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .developer-title {
     font-size: 2rem;
     margin-bottom: 15px;
     letter-spacing: 0.5px;
+    text-align: center;
   }
   
   .company-name {
@@ -434,11 +668,13 @@
     margin-bottom: 25px;
     letter-spacing: 0.4px;
     line-height: 1.4;
+    text-align: center;
   }
   
   .developer-text {
     max-width: 100%;
     margin-bottom: 25px;
+    text-align: center;
   }
   
   .developer-paragraph {
@@ -446,6 +682,7 @@
     line-height: 1.6;
     margin-bottom: 16px;
     letter-spacing: 0;
+    text-align: center;
   }
   
   .developer-cta-button {
@@ -475,38 +712,69 @@
   .developer-section {
     top: 110px;
     width: 100%;
-    padding: 15px 50px 15px 15px;
+    padding: 20px 15px 20px 15px;
     min-height: calc(100vh - 110px);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .developer-content {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 25px;
+    width: 100%;
+  }
+  
+  .developer-image-container {
+    display: none;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 95%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
   }
   
   .developer-title {
-    font-size: 1.75rem;
-    margin-bottom: 12px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
     letter-spacing: 0.3px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .company-name {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
-    line-height: 1.35;
-    letter-spacing: 0.3px;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
+    text-align: center;
   }
   
   .developer-text {
     margin-bottom: 20px;
+    max-width: 100%;
+    text-align: center;
   }
   
   .developer-paragraph {
-    font-size: 0.75rem;
-    line-height: 1.5;
-    margin-bottom: 14px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
     letter-spacing: 0;
+    text-align: center;
+    max-width: 100%;
   }
   
   .developer-cta-button {
-    padding: 8px 18px;
-    font-size: 0.8rem;
-    margin-top: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    margin-top: 10px;
   }
   
   .action-buttons {
@@ -530,44 +798,77 @@
   .developer-section {
     top: 0;
     width: 100%;
-    padding: 100px 12px 30px 12px;
-    height: 100vh;
+    padding: 90px 12px 25px 12px;
+    min-height: 100vh;
     justify-content: center;
-    overflow: hidden;
+    align-items: center;
+    overflow-y: auto;
+  }
+  
+  .developer-content {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .developer-image-container {
+    display: none;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 5px;
   }
   
   .developer-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.6rem;
+    margin-bottom: 12px;
     letter-spacing: 0.2px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .company-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 18px;
     line-height: 1.3;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.15px;
+    text-align: center;
   }
   
   .developer-text {
     margin-bottom: 18px;
+    max-width: 100%;
+    text-align: center;
   }
   
   .developer-paragraph {
-    font-size: 0.7rem;
-    line-height: 1.5;
-    margin-bottom: 12px;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
     letter-spacing: 0;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
   }
   
   .developer-paragraph strong {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
   
   .developer-cta-button {
-    padding: 8px 16px;
-    font-size: 0.75rem;
-    margin-top: 6px;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+    margin-top: 8px;
   }
   
   .action-buttons {
@@ -603,42 +904,76 @@
 @media (max-width: 360px) {
   .developer-section {
     top: 90px;
-    padding: 10px 45px 10px 10px;
+    padding: 15px 10px 15px 10px;
     min-height: calc(100vh - 90px);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .developer-content {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 18px;
+    width: 100%;
+  }
+  
+  .developer-image-container {
+    display: none;
+  }
+  
+  .developer-text-container {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 3px;
   }
   
   .developer-title {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
     letter-spacing: 0.1px;
+    text-align: center;
+    line-height: 1.2;
   }
   
   .company-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 15px;
     letter-spacing: 0.1px;
     line-height: 1.3;
+    text-align: center;
   }
   
   .developer-text {
     margin-bottom: 15px;
+    max-width: 100%;
+    text-align: center;
   }
   
   .developer-paragraph {
-    font-size: 0.65rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
     letter-spacing: 0;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
   }
   
   .developer-paragraph strong {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
   }
   
   .developer-cta-button {
-    padding: 6px 14px;
-    font-size: 0.7rem;
-    margin-top: 5px;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    margin-top: 6px;
   }
   
   .action-buttons {

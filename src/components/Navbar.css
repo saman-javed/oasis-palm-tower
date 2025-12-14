@@ -32,45 +32,16 @@
   position: absolute;
   left: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  align-items: center;
   z-index: 10;
   margin-top: 80px;
 }
 
-.branding-oasis {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000000;
-  margin: 0;
-  margin-left: 28px;
-  line-height: 1;
-  letter-spacing: 2px;
-}
-
-.branding-palm-tower {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.branding-line {
-  width: 25px;
-  height: 1px;
-  background: #000000;
-  flex-shrink: 0;
-}
-
-.branding-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: #000000;
-  letter-spacing: 1px;
-  white-space: nowrap;
+.navbar-logo-img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 .navbar-brand {
@@ -382,7 +353,7 @@
   text-decoration: none;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 2000px) {
   /* .navbar { */
     /* padding: 25px 30px; */
   /* } */
@@ -436,7 +407,7 @@ margin-top: 80px;
   .navbar-branding {
     position: absolute;
     left: 30px;
-    top: 40px;
+    top: 15px;
     margin-top: 0;
     z-index: 10;
     display: flex;
@@ -445,27 +416,16 @@ margin-top: 80px;
     justify-content: flex-start;
   }
   
-  .branding-oasis {
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-  
-  .branding-palm-tower {
-    align-items: center;
-    margin-top: 0;
+  .navbar-logo-img {
+    width: 70px;
   }
   
   .mobile-menu-toggle {
     display: flex !important;
     position: absolute;
-    top: 48px;
+    top: 40px;
     right: 30px;
     z-index: 1002;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .mobile-menu-toggle {
     align-items: center;
     justify-content: center;
     height: fit-content;
@@ -502,17 +462,8 @@ margin-top: 80px;
     margin-left: 15px;
   }
   
-  .branding-oasis {
-    font-size: 1.8rem;
-    
-  }
-  
-  .branding-text {
-    font-size: 0.7rem;
-  }
-  
-  .branding-line {
-    width: 20px;
+  .navbar-logo-img {
+    width: 70px;
   }
 }
 
@@ -532,20 +483,12 @@ margin-top: 80px;
   
   .navbar-branding {
     left: 20px;
-    top: 40px;
+    /* top: 40px; */
     margin-top: 0;
   }
   
-  .branding-oasis {
-    font-size: 1.5rem;
-  }
-  
-  .branding-text {
-    font-size: 0.65rem;
-  }
-  
-  .branding-line {
-    width: 18px;
+  .navbar-logo-img {
+    width: 60px;
   }
   
   .mobile-menu-toggle {
@@ -578,24 +521,12 @@ margin-top: 80px;
   
   .navbar-branding {
     left: 15px;
-    top: 40px;
+    /* top: 40px; */
     margin-top: 0;
   }
   
-  .branding-oasis {
-    font-size: 1.2rem;
-  }
-  
-  .branding-text {
-    font-size: 0.6rem;
-  }
-  
-  .branding-line {
-    width: 15px;
-  }
-  
-  .branding-palm-tower {
-    gap: 8px;
+  .navbar-logo-img {
+    width: 50px;
   }
   
   .brand-subtitle {

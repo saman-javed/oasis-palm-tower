@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/logo1.png';
 
 const Navbar = ({ scrollToSection }) => {
   const location = useLocation();
@@ -23,8 +24,56 @@ const Navbar = ({ scrollToSection }) => {
       setActiveSection(hash);
     }
 
-    // Only update active section on manual nav clicks, not on scroll
-    // Scroll-based detection removed as requested
+    // Detect active section on scroll and keyboard navigation
+    const sections = ['home', 'about', 'features', 'developer'];
+    
+    const checkActiveSection = () => {
+      // Don't update if user just clicked a nav link (give it time to settle)
+      if (isManualClickRef.current) {
+        return;
+      }
+
+      const appElement = document.querySelector('.app');
+      if (!appElement) return;
+
+      const viewportHeight = window.innerHeight;
+      let currentSection = 'home';
+      let maxVisible = 0;
+      
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if section is in the middle 50% of viewport
+          if (rect.top <= viewportHeight * 0.5 && rect.bottom >= viewportHeight * 0.5) {
+            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+            const visibility = visibleHeight / viewportHeight;
+            if (visibility > maxVisible) {
+              maxVisible = visibility;
+              currentSection = sectionId;
+            }
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    // Listen to scroll events on .app container
+    const appElement = document.querySelector('.app');
+    if (appElement) {
+      appElement.addEventListener('scroll', checkActiveSection);
+      // Initial check
+      setTimeout(checkActiveSection, 100);
+      
+      // Also check periodically to catch keyboard navigation
+      const intervalId = setInterval(checkActiveSection, 200);
+      
+      return () => {
+        appElement.removeEventListener('scroll', checkActiveSection);
+        clearInterval(intervalId);
+      };
+    }
   }, [location.pathname, location.hash]);
 
   const handleNavClick = (e, sectionId) => {
@@ -132,12 +181,13 @@ const Navbar = ({ scrollToSection }) => {
       <div className="navbar-content">
         {/* Branding Logo - Left */}
         <div className="navbar-branding">
-          <h1 className="branding-oasis">OASIS</h1>
+          {/* <h1 className="branding-oasis">OASIS</h1>
           <div className="branding-palm-tower">
             <span className="branding-line"></span>
             <span className="branding-text">PALM TOWER</span>
             <span className="branding-line"></span>
-          </div>
+          </div> */}
+          <img src={logo} alt="Oasis Palm Tower" className="navbar-logo-img" />
         </div>
         
         {/* Desktop Navigation */}

@@ -19,7 +19,7 @@ function Footer({ scrollToSection }) {
   };
 
   return (
-    <footer className="footer">
+    <footer id="footer" className="footer">
       <div className="footer-container">
         {/* Main Footer Content - 4 Columns */}
         <div className="footer-content">
