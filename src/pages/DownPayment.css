@@ -3,7 +3,7 @@
 .down-payment-page {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 10%, #3d2f1f 25%, #6b583f 40%, #C0A268 50%, #5a4a35 60%, #3d2f1f 75%, #2d2418 90%, #1a1a1a 100%);
   background-attachment: fixed;
@@ -403,8 +403,10 @@
 @media (max-width: 800px) {
   .grid-section {
     width: 100%;
-    padding: 20px 60px 20px 20px;
-    top: 120px;
+    padding: 20px 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   
   .grid-main-title {
@@ -426,22 +428,22 @@
 
 @media (max-width: 768px) {
   .down-payment-page {
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
   }
   
   .grid-section {
     position: absolute;
-    top: 120px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     width: 100%;
-    padding: 20px 60px 20px 20px;
+    padding: 20px 20px;
     margin: 0 auto;
-    min-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
   }
   
   .grid-main-title {
@@ -526,9 +528,11 @@
 @media (max-width: 640px) {
   .grid-section {
     width: 100%;
-    padding: 20px 15px 20px 15px;
-    top: 110px;
-    min-height: calc(100vh - 110px);
+    padding: 20px 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: auto;
     justify-content: center;
     align-items: center;
   }
@@ -625,12 +629,14 @@
 @media (max-width: 480px) {
   .grid-section {
     width: 100%;
-    padding: 90px 12px 25px 12px;
-    top: 100px;
-    min-height: calc(100vh - 100px);
+    padding: 20px 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: auto;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: visible;
   }
   
   .grid-main-title {
@@ -738,9 +744,11 @@
 @media (max-width: 360px) {
   .grid-section {
     width: 100%;
-    padding: 15px 10px 15px 10px;
-    top: 90px;
-    min-height: calc(100vh - 90px);
+    padding: 15px 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: auto;
     justify-content: center;
     align-items: center;
   }

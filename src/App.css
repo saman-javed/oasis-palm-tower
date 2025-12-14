@@ -13,7 +13,7 @@ html, body {
 .app {
   position: relative;
   width: 100%;
-  height: 100vh; /* NOT min-height - required for scroll container */
+  height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   overflow-y: scroll; /* THIS IS KEY - makes .app the scroll container */
   overflow-x: hidden;
   scroll-snap-type: y mandatory; /* Enable scroll snapping */
@@ -25,7 +25,7 @@ html, body {
 section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -35,16 +35,21 @@ section {
 .home-section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   overflow: hidden;
+  background: #000;
 }
 
 /* Background Video */
 .video-container {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   z-index: 1;
+  background: #000;
 }
 
 .background-video {
@@ -57,6 +62,21 @@ section {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
+}
+
+/* When showing building image (not video), zoom to fill entire screen - NO BLACK SPACES */
+.video-container img.background-video {
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2);
+  min-width: 120%;
+  min-height: 120%;
 }
 
 .video-overlay {
@@ -183,6 +203,47 @@ section {
 .cta-button:active {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 15px rgba(192, 162, 104, 0.4) !important;
+}
+
+/* Watch Video Button */
+.watch-video-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(192, 162, 104, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(192, 162, 104, 0.5);
+  color: #C0A268;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.watch-video-btn:hover {
+  background: rgba(192, 162, 104, 0.3);
+  border-color: rgba(192, 162, 104, 0.8);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 162, 104, 0.5);
+}
+
+.watch-video-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(192, 162, 104, 0.4);
+}
+
+.watch-video-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 /* Contact Icons */
@@ -595,7 +656,7 @@ section {
   .app {
     overflow-x: hidden;
     overflow-y: scroll; /* Keep scroll for snap to work */
-    height: 100vh; /* Keep fixed height for snap */
+    height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   }
   
   .hero-section {
@@ -685,9 +746,15 @@ section {
   .app {
     overflow-x: hidden;
     overflow-y: scroll; /* Keep scroll for snap to work */
-    height: 100vh; /* Keep fixed height for snap - NOT auto */
+    height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   }
   
+  /* Ensure image fills screen on mobile */
+  .video-container img.background-video {
+    transform: translate(-50%, -50%) scale(1.3);
+    min-width: 130%;
+    min-height: 130%;
+  }
   
   .hero-section {
     position: absolute;
@@ -880,9 +947,15 @@ section {
   .app {
     overflow-x: hidden;
     overflow-y: scroll; /* Keep scroll for snap to work */
-    height: 100vh; /* Keep fixed height for snap - NOT auto */
+    height: 100dvh; /* Dynamic viewport height - accounts for browser UI */
   }
   
+  /* Ensure image fills screen on small mobile */
+  .video-container img.background-video {
+    transform: translate(-50%, -50%) scale(1.4);
+    min-width: 140%;
+    min-height: 140%;
+  }
   
   .hero-section {
     position: absolute;
