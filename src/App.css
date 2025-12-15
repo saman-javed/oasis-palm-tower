@@ -77,7 +77,7 @@ section {
 /* When showing building image (not video), zoom to fill entire screen - NO BLACK SPACES */
 .video-container img.background-video {
   object-fit: cover;
-  object-position: center center;
+  object-position: center 24%;
   width: 100%;
   height: 100%;
   display: block;
@@ -147,7 +147,7 @@ section {
   line-height: 1.1;
   margin: 0 0 15px 0;
   color: rgb(0, 0, 0);
-  text-shadow: 2px 0px 4px rgba(194, 166, 110, 0.744);
+  text-shadow: 2px 0px 4px rgba(194, 166, 110, 0.564);
   text-align: left;
   width: 100%;
   white-space: nowrap;
@@ -168,7 +168,7 @@ section {
   font-weight: 600;
   /* line-height: 1.4; */
   color: #0b0b0b;
-  text-shadow: 1px 0px 2px rgba(192, 163, 104, 0.603);
+  text-shadow: 1px 0px 2px rgba(192, 163, 104, 0.299);
   letter-spacing: 0.2px;
   text-align: left;
   width: 100%;
@@ -185,7 +185,7 @@ section {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
+  box-shadow: 0 4px 15px rgba(36, 36, 36, 0.525);
   letter-spacing: 1px;
   text-align: center;
   display: inline-block;
@@ -270,7 +270,7 @@ section {
   width: 40px;
   height: 40px;
   background: #000000;
-  border: 1px solid #C0A268;
+  border: 1px solid #000000;
   border-radius: 50%;
   display: flex;
   align-items: center;

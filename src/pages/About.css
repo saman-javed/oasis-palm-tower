@@ -558,13 +558,13 @@
 
 @media (max-width: 480px) {
   .about-section {
-    top: 100px;
+    top: 90px;
     width: 100%;
-    padding: 90px 12px 25px 12px;
-    min-height: calc(100vh - 100px);
-    justify-content: center;
+    padding: 20px 12px 20px 12px;
+    min-height: calc(100vh - 90px);
+    justify-content: flex-start;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: hidden;
   }
   
   .about-title {
@@ -587,6 +587,9 @@
     margin-bottom: 18px;
     max-width: 100%;
     text-align: center;
+    max-height: calc(100vh - 220px); /* Keep content within screen on small devices */
+    overflow-y: auto;                /* Allow inner scroll if text is long */
+    padding-right: 4px;              /* Small space for scrollbar */
   }
   
   .about-paragraph {

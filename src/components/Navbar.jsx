@@ -278,12 +278,14 @@ const Navbar = ({ scrollToSection }) => {
         </Link>
       </div>
 
-      {/* Mobile Hamburger Menu */}
-      <button className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`} onClick={toggleMobileMenu}>
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
-      </button>
+      {/* Mobile Hamburger Menu - hide when sidebar is open */}
+      {!isMobileMenuOpen && (
+        <a className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </a>
+      )}
 
       {/* Mobile Navigation Overlay */}
       <div className={`mobile-nav-overlay ${isMobileMenuOpen ? 'active' : ''}`} onClick={closeMobileMenu}>
@@ -333,13 +335,7 @@ const Navbar = ({ scrollToSection }) => {
             </Link>
         </div>
         
-        <Link 
-          to="/explore-building" 
-          className="mobile-explore-btn"
-          onClick={closeMobileMenu}
-        >
-          Explore Building
-        </Link>
+      
         </div>
       </div>
     </nav>

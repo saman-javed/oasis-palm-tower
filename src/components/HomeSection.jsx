@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../App.css';
 import buildingImage from '../assets/building-hero1.jpeg';
-import buildingImage2 from '../assets/build1.png';
+import buildingImage2 from '../assets/6004.jpg';
 
 function HomeSection({ showVideo = false }) {
   const videoRef = useRef(null);
