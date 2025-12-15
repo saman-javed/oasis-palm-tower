@@ -173,7 +173,8 @@
 }
 
 /* Bottom Left - Developer Info */
-.bottom-left-info {
+/* Project By - Bottom Left (same style as FloorDetail and ExplorePlan) */
+.office-project-by {
   position: absolute;
   bottom: 30px;
   left: 30px;
@@ -181,27 +182,30 @@
   color: white;
 }
 
-.developer-text {
+.office-project-text {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  position: relative;
-  /* padding-left: 20px; */
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 6px 0;
+}
+
+.office-developer-logo {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.developer-prefix {
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+.office-diamond {
+  color: #C0A268;
+  font-size: 1.2rem;
 }
 
-.developer-name {
-  color: #C0A268;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+.office-developer-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
 }
 
 
@@ -215,39 +219,94 @@
 }
 
 
-/* Bottom Right - Contact Info */
-.bottom-right-controls {
-  position: absolute;
-  bottom: 30px;
+/* Contact Icons - Same as Home Page */
+.contact-icons {
+  position: fixed;
   right: 30px;
-  z-index: 10;
+  bottom: 30px;
+  z-index: 999;
+  width: auto;
+  height: auto;
 }
 
-.contact-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contact-btn {
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  border: 1px solid #C0A268;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: white;
   cursor: pointer;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
+  color: #C0A268;
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0;
+  outline: none;
+  min-width: 36px;
+  max-width: 165px;
+}
+
+.contact-icon.amenities-icon {
+  bottom: 114px;
+}
+
+.contact-icon.directions-icon {
+  bottom: 0;
+}
+
+.contact-icon.register-icon {
+  bottom: 57px;
+}
+
+.contact-icon:hover {
+  width: 180px !important;
+  min-width: 180px;
+  max-width: 180px;
+  background: #C0A268;
+  color: #000000;
+  justify-content: flex-start;
+  padding-left: 12px;
+  padding-right: 18px;
+  box-shadow: 0 6px 20px rgba(192, 162, 104, 0.5);
+  border-radius: 50px;
+}
+
+.contact-icon svg {
+  color: #C0A268;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
   transition: all 0.3s ease;
 }
 
-.contact-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+.contact-icon:hover svg {
+  color: #000000;
+  margin-right: 10px;
+}
+
+.contact-icon-text {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.1s;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.contact-icon:hover .contact-icon-text {
+  opacity: 1;
+  max-width: 120px;
 }
 
 /* Mobile Responsiveness */
@@ -262,19 +321,9 @@
     right: 20px;
   }
 
-  .bottom-right-controls {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .bottom-left-info {
+  .office-project-by {
     bottom: 20px;
     left: 20px;
-  }
-
-  .bottom-right-controls {
-    bottom: 20px;
-    right: 20px;
   }
 
   .building-title-main {
@@ -290,16 +339,48 @@
     font-size: 0.85rem;
   }
 
-  .developer-text {
-    font-size: 0.9rem;
+  .office-project-text {
+    font-size: 0.7rem;
+  }
+  
+  .office-developer-name {
+    font-size: 0.75rem;
   }
 
-  .contact-btn {
-    width: 48px;
-    height: 48px;
+  .contact-icons {
+    right: 25px;
+    bottom: 25px;
+  }
+  
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
   }
 
-  .contact-btn svg {
+  .contact-icon.amenities-icon {
+    bottom: 106px;
+  }
+  
+  .contact-icon:hover {
+    width: 160px !important;
+    min-width: 160px;
+    max-width: 160px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 115px;
+  }
+  
+  .contact-icon svg {
     width: 18px;
     height: 18px;
   }
@@ -332,14 +413,9 @@
     right: 15px;
   }
 
-  .bottom-left-info {
+  .office-project-by {
     bottom: 15px;
     left: 15px;
-  }
-
-  .bottom-right-controls {
-    bottom: 15px;
-    right: 15px;
   }
 
   .building-title-main {
@@ -371,28 +447,54 @@
     font-size: 0.7rem;
   }
   
-  .developer-text {
-    font-size: 0.85rem;
-    padding-left: 15px;
-  }
-
-  .developer-text::before {
-    width: 2px;
-    height: 16px;
+  .office-project-text {
+    font-size: 0.65rem;
   }
   
-  .contact-btn {
-    width: 42px;
-    height: 42px;
+  .office-developer-name {
+    font-size: 0.7rem;
+  }
+  
+  .office-diamond {
+    font-size: 1rem;
+  }
+  
+  .contact-icons {
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
   }
 
-  .contact-btn svg {
-    width: 16px;
-    height: 16px;
+  .contact-icon.amenities-icon {
+    bottom: 106px;
   }
-
-  .contact-buttons {
-    gap: 8px;
+  
+  .contact-icon:hover {
+    width: 145px !important;
+    min-width: 145px;
+    max-width: 145px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 110px;
+  }
+  
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -413,14 +515,9 @@
     left: 10px;
   }
 
-  .bottom-left-info {
+  .office-project-by {
     bottom: 10px;
     left: 10px;
-  }
-
-  .bottom-right-controls {
-    bottom: 10px;
-    right: 10px;
   }
 
   .building-title-main {
@@ -436,28 +533,54 @@
     width: 15px;
   }
   
-  .developer-text {
-    font-size: 0.8rem;
-    padding-left: 12px;
-  }
-
-  .developer-text::before {
-    width: 2px;
-    height: 14px;
+  .office-project-text {
+    font-size: 0.6rem;
   }
   
-  .contact-btn {
-    width: 38px;
-    height: 38px;
+  .office-developer-name {
+    font-size: 0.65rem;
+  }
+  
+  .office-diamond {
+    font-size: 0.9rem;
   }
 
-  .contact-btn svg {
-    width: 14px;
-    height: 14px;
+  .contact-icons {
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .contact-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 48px;
   }
 
-  .contact-buttons {
-    gap: 6px;
+  .contact-icon.amenities-icon {
+    bottom: 96px;
+  }
+  
+  .contact-icon:hover {
+    width: 130px !important;
+    min-width: 130px;
+    max-width: 130px;
+    border-radius: 17px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 100px;
+  }
+  
+  .contact-icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 

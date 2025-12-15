@@ -15,6 +15,11 @@ import './pages/Developer.css';
 function App() {
   const location = useLocation();
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showVideo, setShowVideo] = useState(() => {
+    // Load video preference from localStorage, default to false
+    const saved = localStorage.getItem('showVideo');
+    return saved === 'true';
+  });
   const [registerForm, setRegisterForm] = useState({
     firstName: '',
     lastName: '',
@@ -47,6 +52,26 @@ function App() {
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
+      // Map section IDs to URL hash (features -> show_features)
+      const hashMap = {
+        'home': 'home',
+        'about': 'about',
+        'features': 'show_features',
+        'developer': 'developer'
+      };
+      const urlHash = hashMap[sectionId] || sectionId;
+      
+      // Update URL hash - for home, use empty hash (just "/")
+      if (sectionId === 'home') {
+        if (window.location.hash !== '' && window.location.hash !== '#home') {
+          window.history.replaceState(null, '', '/');
+        }
+      } else {
+        if (window.location.hash !== `#${urlHash}`) {
+          window.history.replaceState(null, '', `#${urlHash}`);
+        }
+      }
+      
       // Use scrollIntoView for reliable scrolling
       element.scrollIntoView({
         behavior: 'smooth',
@@ -105,12 +130,21 @@ function App() {
   useEffect(() => {
     const hash = window.location.hash.substring(1); // Remove the #
     if (hash) {
+      // Map URL hash back to section ID (show_features -> features)
+      const reverseHashMap = {
+        'home': 'home',
+        'about': 'about',
+        'show_features': 'features',
+        'developer': 'developer'
+      };
+      const sectionId = reverseHashMap[hash] || hash;
+      
       // Small delay to ensure DOM is ready
       setTimeout(() => {
-        scrollToSection(hash);
+        scrollToSection(sectionId);
       }, 100);
     }
-  }, []);
+  }, [scrollToSection]);
 
   // Handle navigation state (when navigating from other pages like Blogs)
   useEffect(() => {
@@ -203,6 +237,36 @@ function App() {
           <span className="contact-icon-text">Get Directions</span>
         </button>
         <button 
+          className="contact-icon video-icon"
+          onClick={() => {
+            scrollToSection('home');
+            setShowVideo(prev => {
+              const newValue = !prev;
+              // Save preference to localStorage so it persists on refresh
+              localStorage.setItem('showVideo', newValue.toString());
+              return newValue;
+            });
+          }}
+          title={showVideo ? "Show Image" : "Watch Video"}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {showVideo ? (
+              // Show pause/stop icon when video is playing
+              <>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                <rect x="9" y="9" width="6" height="6" fill="currentColor" />
+              </>
+            ) : (
+              // Show play icon when image is showing
+              <>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                <path d="M10 8V16L16 12L10 8Z" fill="currentColor" />
+              </>
+            )}
+          </svg>
+          <span className="contact-icon-text">{showVideo ? "Show Image" : "Watch Video"}</span>
+        </button>
+        <button 
           className="contact-icon register-icon"
           onClick={() => setShowRegisterModal(true)}
           title="Register Request"
@@ -215,7 +279,7 @@ function App() {
       </div>
       
       {/* Home Section */}
-      <HomeSection />
+      <HomeSection showVideo={showVideo} />
 
       {/* About Section */}
       <AboutSection variant="compact" />

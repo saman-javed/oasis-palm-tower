@@ -21,6 +21,16 @@ html, body {
   background: #000000;
 }
 
+/* Hide scrollbar but keep scroll functionality */
+.app {
+  -ms-overflow-style: none;      /* IE and Edge */
+  scrollbar-width: none;         /* Firefox */
+}
+
+.app::-webkit-scrollbar {        /* Chrome, Safari, Opera */
+  display: none;
+}
+
 /* Section Styling */
 section {
   position: relative;
@@ -286,6 +296,10 @@ section {
 
 .contact-icon.register-icon {
   bottom: 57px;
+}
+
+.contact-icon.video-icon {
+  bottom: 114px;
 }
 
 .contact-icon:hover {

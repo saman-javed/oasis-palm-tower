@@ -4,7 +4,9 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  height: auto;
   overflow-x: hidden;
+  overflow-y: visible;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2418 10%, #3d2f1f 25%, #6b583f 40%, #C0A268 50%, #5a4a35 60%, #3d2f1f 75%, #2d2418 90%, #1a1a1a 100%);
   background-attachment: fixed;
   background-size: 200% 200%;
@@ -12,8 +14,71 @@
   padding-bottom: 0;
   margin: 0;
   box-sizing: border-box;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+}
+
+/* Normal footer styling for blog pages (not section-style) */
+.blogs-page .footer {
+  position: relative;
+  height: auto;
+  min-height: auto;
+  display: block;
+  scroll-snap-align: none;
+  margin-top: 0;
+  padding: 40px 40px 30px;
+}
+
+.blogs-page .footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .blogs-page .footer {
+    padding: 40px 30px 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogs-page .footer {
+    padding: 30px 20px 25px;
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+    justify-content: flex-start;
+  }
+  
+  .blogs-page .footer-container {
+    padding: 0 15px;
+    height: auto;
+    display: block;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .blogs-page .footer {
+    padding: 25px 15px 20px;
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
+  }
+  
+  .blogs-page .footer-container {
+    padding: 0 10px;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 360px) {
+  .blogs-page .footer {
+    padding: 20px 12px 18px;
+  }
+  
+  .blogs-page .footer-container {
+    padding: 0 8px;
+  }
 }
 
 @keyframes gradientShift {
@@ -193,6 +258,36 @@
 
 .read-more:hover {
   color: #E6BE8A;
+}
+
+.read-more-btn {
+  background: #C0A268;
+  color: #000000;
+  border: 2px solid #C0A268;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
+}
+
+.read-more-btn:hover {
+  background: #000000;
+  color: #C0A268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 162, 104, 0.5);
+}
+
+.read-more-btn.small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  margin-top: 10px;
 }
 
 /* Blog Sidebar */
@@ -595,15 +690,14 @@
   position: fixed;
   right: 30px;
   bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 15;
+  z-index: 999;
+  width: auto;
+  height: auto;
 }
 
 .contact-icon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: #000000;
   border: 1px solid #C0A268;
   border-radius: 50%;
@@ -611,21 +705,70 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(192, 162, 104, 0.3);
+  color: #C0A268;
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0;
+  outline: none;
+  min-width: 36px;
+  max-width: 165px;
+}
+
+.contact-icon.directions-icon {
+  bottom: 0;
+}
+
+.contact-icon.register-icon {
+  bottom: 57px;
 }
 
 .contact-icon:hover {
+  width: 180px !important;
+  min-width: 180px;
+  max-width: 180px;
   background: #C0A268;
   color: #000000;
-  transform: scale(1.1);
+  justify-content: flex-start;
+  padding-left: 12px;
+  padding-right: 18px;
   box-shadow: 0 6px 20px rgba(192, 162, 104, 0.5);
+  border-radius: 50px;
 }
 
 .contact-icon svg {
   color: #C0A268;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.contact-icon:hover svg {
+  color: #000000;
+  margin-right: 10px;
+}
+
+.contact-icon-text {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.1s;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.contact-icon:hover .contact-icon-text {
+  opacity: 1;
+  max-width: 120px;
 }
 
 /* Responsive Design */
@@ -683,18 +826,37 @@
   }
   
   .contact-icons {
-    right: 20px;
-    bottom: 20px;
+    right: 25px;
+    bottom: 25px;
   }
   
   .contact-icon {
-    width: 45px;
-    height: 45px;
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
+  }
+  
+  .contact-icon:hover {
+    width: 160px !important;
+    min-width: 160px;
+    max-width: 160px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 115px;
   }
   
   .contact-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -724,13 +886,32 @@
   }
   
   .contact-icons {
-    right: 15px;
-    bottom: 15px;
+    right: 20px;
+    bottom: 20px;
   }
   
   .contact-icon {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 53px;
+  }
+  
+  .contact-icon:hover {
+    width: 145px !important;
+    min-width: 145px;
+    max-width: 145px;
+    border-radius: 19px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 110px;
   }
   
   .contact-icon svg {
@@ -765,13 +946,32 @@
   }
   
   .contact-icons {
-    right: 10px;
-    bottom: 10px;
+    right: 15px;
+    bottom: 15px;
   }
   
   .contact-icon {
     width: 35px;
     height: 35px;
+  }
+  
+  .contact-icon.directions-icon {
+    bottom: 0;
+  }
+  
+  .contact-icon.register-icon {
+    bottom: 48px;
+  }
+  
+  .contact-icon:hover {
+    width: 130px !important;
+    min-width: 130px;
+    max-width: 130px;
+    border-radius: 17px;
+  }
+  
+  .contact-icon:hover .contact-icon-text {
+    max-width: 100px;
   }
   
   .contact-icon svg {

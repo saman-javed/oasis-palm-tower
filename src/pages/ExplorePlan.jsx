@@ -288,14 +288,14 @@ const ExplorePlan = () => {
   ];
 
   const apartment5thFloorUnits = [
-    { id: 'apt-5-2', name: 'Apartment 1', area: '1150 SFT', bedCount: 3 },
-    { id: 'apt-5-3', name: 'Apartment 2', area: '1100 SFT', bedCount: 2 },
-    { id: 'apt-5-4', name: 'Apartment 3', area: '1250 SFT', bedCount: 2 },
-    { id: 'apt-5-5', name: 'Apartment 4', area: '1180 SFT', bedCount: 3 },
-    { id: 'apt-5-7', name: 'Apartment 5', area: '1300 SFT', bedCount: 2 },
-    { id: 'apt-2-9', name: 'Apartment 6', area: '1150 SFT', bedCount: 2 },
-    { id: 'apt-2-11', name: 'Apartment 7', area: '1250 SFT', bedCount: 2 },
-    { id: 'apt-2-13', name: 'Apartment 8', area: '1120 SFT', bedCount: 2 },
+    { id: 'apt-5-2', name: 'Apartment 1', area: '1310 SFT', bedCount: 3 },
+    { id: 'apt-5-3', name: 'Apartment 2', area: '720 SFT', bedCount: 2 },
+    { id: 'apt-5-4', name: 'Apartment 3', area: '720 SFT', bedCount: 2 },
+    { id: 'apt-5-5', name: 'Apartment 4', area: '1310 SFT', bedCount: 3 },
+    { id: 'apt-5-7', name: 'Apartment 5', area: '950 SFT', bedCount: 2 },
+    { id: 'apt-2-9', name: 'Apartment 6', area: '930 SFT', bedCount: 2 },
+    { id: 'apt-2-11', name: 'Apartment 7', area: '930 SFT', bedCount: 2 },
+    { id: 'apt-2-13', name: 'Apartment 8', area: '950 SFT', bedCount: 2 },
   ];
 
   // Get apartment units based on floor

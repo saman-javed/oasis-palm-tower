@@ -331,7 +331,7 @@
   width: 240px;
   min-width: 240px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, #000 100%);
-  padding: 20px 18px 15px 18px;
+  padding: 20px 22px 15px 18px; /* extra right padding so card doesn't touch edge */
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -464,9 +464,10 @@
     inset 0 -1px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1;
-  max-width: 130px;
+  max-width: 190px;
   width: 100%;
   flex-shrink: 0;
+  box-sizing: border-box; /* include padding + border inside width so card never overflows sidebar */
 }
 
 .office-details-header {
@@ -511,6 +512,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 4px;
 }
 
 .office-detail-label {
@@ -524,6 +526,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   color: #ffffff;
+  text-align: right;
 }
 
 .office-interested-btn {
@@ -762,7 +765,6 @@
   padding: 40px 40px 100px 40px;
   overflow: visible;
   position: relative;
-  transition: transform 0.3s ease;
 }
 
 .office-plan-image-wrapper::before {
@@ -905,7 +907,7 @@
 @media (max-width: 1024px) {
   .office-plan-sidebar {
     width: 200px;
-    padding: 20px 15px;
+    padding: 20px 20px 15px 15px; /* keep extra right padding on medium screens */
   }
 
   .office-plan-main {
@@ -916,11 +918,38 @@
 @media (max-width: 768px) {
   .office-plan-sidebar {
     width: 200px;
-    padding: 20px 15px;
+    padding: 20px 20px 15px 15px;
   }
 
   .office-plan-main {
     margin-left: 200px;
+  }
+
+  /* Make office detail card full-width on tablets/large phones */
+  .office-details-panel {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 0 15px 0; /* align card more to the left on small screens */
+  }
+
+  /* Stack label/value vertically so long values don't wrap awkwardly */
+  .office-detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .office-detail-value {
+    text-align: left;
+  }
+
+  .office-details-title {
+    font-size: 0.95rem;
+  }
+
+  .office-detail-label,
+  .office-detail-value {
+    font-size: 0.8rem;
   }
 
   .office-brand-main {
@@ -946,8 +975,9 @@
   }
 
   .office-plan-sidebar {
-    transform: translateX(-100%);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    /* Hide sidebar completely off-screen on small viewports */
+    transform: translateX(-110%);
+    box-shadow: none;
   }
 
   .office-plan-sidebar.open {
@@ -1007,6 +1037,27 @@
   .office-bottom-btn {
     padding: 10px 18px;
     font-size: 0.85rem;
+  }
+
+  /* Tighter card on very small phones */
+  .office-details-panel {
+    max-width: 100%;
+    width: 100%;
+    padding: 14px 12px;
+    margin: 0 0 15px 0; /* keep aligned to left edge */
+  }
+
+  .office-detail-row {
+    gap: 6px;
+  }
+
+  .office-details-title {
+    font-size: 0.9rem;
+  }
+
+  .office-detail-label,
+  .office-detail-value {
+    font-size: 0.78rem;
   }
 
   .office-action-buttons {

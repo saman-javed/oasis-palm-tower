@@ -26,3 +26,11 @@ body {
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Allow scrolling on blog pages */
+body:has(.blogs-page),
+body:has(.blog-detail-page) {
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
+}

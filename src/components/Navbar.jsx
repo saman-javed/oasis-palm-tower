@@ -20,12 +20,29 @@ const Navbar = ({ scrollToSection }) => {
 
     // Check for hash in URL and set active section accordingly
     const hash = window.location.hash.substring(1);
-    if (hash && (hash === 'home' || hash === 'about' || hash === 'features' || hash === 'developer')) {
+    // Map URL hash back to section ID (show_features -> features)
+    const reverseHashMap = {
+      'home': 'home',
+      'about': 'about',
+      'show_features': 'features',
+      'developer': 'developer'
+    };
+    if (hash && reverseHashMap[hash]) {
+      setActiveSection(reverseHashMap[hash]);
+    } else if (hash && (hash === 'home' || hash === 'about' || hash === 'features' || hash === 'developer')) {
       setActiveSection(hash);
     }
 
     // Detect active section on scroll and keyboard navigation
     const sections = ['home', 'about', 'features', 'developer'];
+    
+    // Map section IDs to URL hash (features -> show_features)
+    const hashMap = {
+      'home': 'home',
+      'about': 'about',
+      'features': 'show_features',
+      'developer': 'developer'
+    };
     
     const checkActiveSection = () => {
       // Don't update if user just clicked a nav link (give it time to settle)
@@ -57,6 +74,21 @@ const Navbar = ({ scrollToSection }) => {
       });
 
       setActiveSection(currentSection);
+      
+      // Update URL hash when scrolling to a section
+      if (currentSection && location.pathname === '/') {
+        const urlHash = hashMap[currentSection] || currentSection;
+        // For home section, use empty hash or #home
+        if (currentSection === 'home') {
+          if (window.location.hash !== '' && window.location.hash !== '#home') {
+            window.history.replaceState(null, '', '/');
+          }
+        } else {
+          if (window.location.hash !== `#${urlHash}`) {
+            window.history.replaceState(null, '', `#${urlHash}`);
+          }
+        }
+      }
     };
 
     // Listen to scroll events on .app container
@@ -109,7 +141,17 @@ const Navbar = ({ scrollToSection }) => {
         scrollToElement();
       }, 200);
     } else {
-      // We're already on the home page, scroll directly
+      // We're already on the home page, update URL hash and scroll
+      // Map section IDs to URL hash (features -> show_features)
+      const hashMap = {
+        'home': 'home',
+        'about': 'about',
+        'features': 'show_features',
+        'developer': 'developer'
+      };
+      const urlHash = hashMap[sectionId] || sectionId;
+      window.history.replaceState(null, '', `#${urlHash}`);
+      
       // Use the passed scrollToSection function if available
       if (scrollToSection) {
         scrollToSection(sectionId);
@@ -222,7 +264,7 @@ const Navbar = ({ scrollToSection }) => {
           </a>
           <Link 
             to="/blogs" 
-            className={`nav-link ${location.pathname === '/blogs' ? 'active' : ''}`}
+            className={`nav-link ${location.pathname === '/blogs' || location.pathname.startsWith('/blog/') ? 'active' : ''}`}
           >
             Blogs
           </Link>
@@ -277,7 +319,7 @@ const Navbar = ({ scrollToSection }) => {
             </a>
             <Link 
               to="/blogs" 
-              className={`mobile-nav-link ${location.pathname === '/blogs' ? 'active' : ''}`}
+              className={`mobile-nav-link ${location.pathname === '/blogs' || location.pathname.startsWith('/blog/') ? 'active' : ''}`}
               onClick={closeMobileMenu}
             >
               Blogs

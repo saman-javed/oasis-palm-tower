@@ -257,45 +257,47 @@ const ExploreBuilding = () => {
       </div>
 
       {/* Bottom Left - Developer Info */}
-      <div className="bottom-left-info">
-        <div className="developer-text">
-          <span className="developer-prefix">A Project by</span> <span className="developer-name">Taiba Developers</span>
+      <div className="office-project-by">
+        <p className="office-project-text">A Project by</p>
+        <div className="office-developer-logo">
+          <span className="office-diamond">◆</span>
+          <span className="office-developer-name">TAIBA DEVELOPERS</span>
         </div>
       </div>
 
 
-      {/* Bottom Right - Contact Info */}
-      <div className="bottom-right-controls">
-        <div className="contact-buttons">
-          <button 
-            className="contact-btn amenities-btn"
-            onClick={() => setShowAmenities(!showAmenities)}
-            title="Amenities"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 2L12.09 8.26L19 9L14 13.74L15.18 20L10 16.77L4.82 20L6 13.74L1 9L7.91 8.26L10 2Z" fill="currentColor"/>
-            </svg>
-          </button>
-          <button 
-            className="contact-btn"
-            onClick={() => window.open('https://maps.app.goo.gl/WMjzyJq1Fpoy4zwL7?g_st=ic', '_blank')}
-            title="Get Directions"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 2C7.24 2 5 4.24 5 7C5 11.25 10 18 10 18C10 18 15 11.25 15 7C15 4.24 12.76 2 10 2ZM10 9.5C8.62 9.5 7.5 8.38 7.5 7C7.5 5.62 8.62 4.5 10 4.5C11.38 4.5 12.5 5.62 12.5 7C12.5 8.38 11.38 9.5 10 9.5Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-            </svg>
-          </button>
-          <button 
-            className="contact-btn"
-            onClick={() => setShowRegisterModal(true)}
-            title="Register Request"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M4 4H16C17.1 4 18 4.9 18 6V14C18 15.1 17.1 16 16 16H4C2.9 16 2 15.1 2 14V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2"/>
-              <path d="M18 6L10 11L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
+      {/* Bottom Right - Contact Info - Same as Home Page */}
+      <div className="contact-icons">
+        <button 
+          className="contact-icon amenities-icon"
+          onClick={() => setShowAmenities(!showAmenities)}
+          title="Amenities"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L14.5 9.9L23 11L15.5 16.5L17.2 24L12 20.1L6.8 24L8.5 16.5L1 11L9.5 9.9L12 2Z" fill="currentColor"/>
+          </svg>
+          <span className="contact-icon-text">Amenities</span>
+        </button>
+        <button 
+          onClick={() => window.open('https://maps.app.goo.gl/WMjzyJq1Fpoy4zwL7?g_st=ic', '_blank', 'noopener,noreferrer')}
+          className="contact-icon directions-icon"
+          title="Get Directions"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+          </svg>
+          <span className="contact-icon-text">Get Directions</span>
+        </button>
+        <button 
+          className="contact-icon register-icon"
+          onClick={() => setShowRegisterModal(true)}
+          title="Register Request"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/>
+          </svg>
+          <span className="contact-icon-text">Register Request</span>
+        </button>
       </div>
 
       {/* Amenities Sidebar */}

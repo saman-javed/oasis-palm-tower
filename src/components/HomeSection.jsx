@@ -1,44 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../App.css';
 import buildingImage from '../assets/building-hero1.jpeg';
+import buildingImage2 from '../assets/build1.png';
 
-function HomeSection() {
-  const [showVideo, setShowVideo] = useState(false);
+function HomeSection({ showVideo = false }) {
   const videoRef = useRef(null);
 
-  // Play video when showVideo is true
+  // Play video when showVideo is true, pause when false
   useEffect(() => {
-    if (showVideo && videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // autoplay blocked — happens on some devices, OK
-      });
+    if (videoRef.current) {
+      if (showVideo) {
+        videoRef.current.play().catch(() => {
+          // autoplay blocked — happens on some devices, OK
+        });
+      } else {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0; // Reset to beginning
+      }
     }
   }, [showVideo]);
-
-  // Pause video when not visible (optimizes performance)
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && showVideo) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(video);
-
-    return () => observer.disconnect();
-  }, [showVideo]);
-
-  const handleWatchVideo = () => {
-    setShowVideo(true);
-  };
 
   return (
     <section id="home" className="home-section">
@@ -46,7 +26,7 @@ function HomeSection() {
       {!showVideo && (
         <div className="video-container">
           <img
-            src={buildingImage}
+            src={buildingImage2}
             alt="Oasis Palm Tower"
             className="background-video"
           />
@@ -65,8 +45,10 @@ function HomeSection() {
             loop
             playsInline
             preload="metadata"
+            disablePictureInPicture
+            controls={false}
           >
-            <source src="/oasis-palm-tower.mp4" type="video/mp4" />
+            <source src="/1019(1).mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="video-overlay"></div>
@@ -82,16 +64,6 @@ function HomeSection() {
           <p className="hero-subtitle">
             A Mountain-Front Investment Promising Up to 25% Annual ROI
           </p>
-          
-          {/* Watch Video Button (only shown when image is displayed) */}
-          {!showVideo && (
-            <button className="watch-video-btn" onClick={handleWatchVideo}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
-              </svg>
-              Watch Video
-            </button>
-          )}
         </div>
       </div>
     </section>

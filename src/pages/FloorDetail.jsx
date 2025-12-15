@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './FloorDetail.css';
+import './ExplorePlan.css';
 import floor56F from '../assets/5-6-F.png';
 import floor4F from '../assets/4-F.png';
 import floor3F from '../assets/3-F.png';
@@ -227,6 +228,7 @@ const FloorDetail = () => {
   const [hoveredUnit, setHoveredUnit] = useState(null);
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [unitTooltipPosition, setUnitTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isClickingUnit, setIsClickingUnit] = useState(false);
   const [showAmenities, setShowAmenities] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
@@ -235,6 +237,7 @@ const FloorDetail = () => {
   });
   const unitSvgRef = useRef(null);
   const imageWrapperRef = useRef(null);
+  const containerRef = useRef(null);
   const amenitiesSidebarRef = useRef(null);
   const sidebarRef = useRef(null);
   
@@ -273,6 +276,19 @@ const FloorDetail = () => {
   const floorImage = floorImages[floorId];
   const floor = floorInfo[floorId];
   const units = floorUnits[floorId] || [];
+
+  const getFloorLabel = (id) => {
+    if (!id) return '';
+    if (id.includes('apartment-5th-floor')) return '5th Floor';
+    if (id.includes('apartment-4th-floor')) return '4th Floor';
+    if (id.includes('apartment-3rd-floor')) return '3rd Floor';
+    if (id.includes('apartment-2nd-floor')) return '2nd Floor';
+    if (id.includes('pent-house-6th-floor')) return '6th Floor';
+    if (id.includes('office-1st-floor')) return '1st Floor';
+    if (id.includes('shop-ground')) return 'Ground Floor';
+    if (id.includes('shop-lower-ground')) return 'Lower Ground Floor';
+    return floor?.name || '';
+  };
 
   useEffect(() => {
     if (!floorImage || !floor) {
@@ -338,7 +354,12 @@ const FloorDetail = () => {
   };
 
   const handleMouseDown = (e) => {
-    if (zoom > 1) {
+    // Don't start dragging if clicking on a unit polygon or tooltip
+    const target = e.target;
+    const isSVG = target.closest('.unit-svg-overlay') || target.tagName === 'polygon' || target.tagName === 'svg';
+    const isTooltip = target.closest('.unit-tooltip');
+    
+    if (zoom > 1 && !isSVG && !isTooltip) {
       setIsDragging(true);
       setDragStart({
         x: e.clientX - position.x,
@@ -349,10 +370,17 @@ const FloorDetail = () => {
 
   const handleMouseMove = (e) => {
     if (isDragging && zoom > 1) {
-      setPosition({
-        x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y,
-      });
+      // Don't drag if hovering over a unit polygon or tooltip
+      const target = e.target;
+      const isSVG = target.closest('.unit-svg-overlay') || target.tagName === 'polygon' || target.tagName === 'svg';
+      const isTooltip = target.closest('.unit-tooltip');
+      
+      if (!isSVG && !isTooltip) {
+        setPosition({
+          x: e.clientX - dragStart.x,
+          y: e.clientY - dragStart.y,
+        });
+      }
     }
   };
 
@@ -370,21 +398,37 @@ const FloorDetail = () => {
 
   const handleUnitClick = (e, unit) => {
     e.stopPropagation(); // Prevent event from bubbling to container
-    if (unitSvgRef.current && imageWrapperRef.current) {
-      const svgRect = unitSvgRef.current.getBoundingClientRect();
-      const wrapperRect = imageWrapperRef.current.getBoundingClientRect();
-      
-      // Calculate position relative to the image wrapper (for absolute positioning)
-      const clickX = e.clientX - wrapperRect.left;
-      const clickY = e.clientY - wrapperRect.top;
-      
-      // Position tooltip above the click point
-      setUnitTooltipPosition({
-        x: clickX,
-        y: clickY
-      });
-      setSelectedUnit(unit.id);
-    }
+    e.preventDefault(); // Prevent any default behavior
+    
+    // Prevent drag from starting
+    setIsDragging(false);
+    
+    // 🔒 Lock transform during click to prevent recalculation
+    setIsClickingUnit(true);
+    
+    // Use requestAnimationFrame to ensure layout is stable before calculating position
+    requestAnimationFrame(() => {
+      if (containerRef.current) {
+        // Get the bounding rect of the outer container (stable, no transform)
+        const containerRect = containerRef.current.getBoundingClientRect();
+        
+        // Calculate position relative to the container (not the transformed wrapper)
+        const clickX = e.clientX - containerRect.left;
+        const clickY = e.clientY - containerRect.top;
+        
+        // Position tooltip at the click point
+        setUnitTooltipPosition({
+          x: clickX,
+          y: clickY
+        });
+        setSelectedUnit(unit.id);
+        
+        // 🔓 Unlock transform AFTER render settles
+        requestAnimationFrame(() => {
+          setIsClickingUnit(false);
+        });
+      }
+    });
   };
 
   const handleContainerClick = (e) => {
@@ -421,12 +465,12 @@ const FloorDetail = () => {
   const nextFloor = currentFloorIndex < allFloors.length - 1 ? allFloors[currentFloorIndex + 1] : null;
 
   return (
-    <div className={`floor-detail-page ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+    <div className="floor-detail-page office-plan-page">
       {/* Left Sidebar */}
       {/* Sidebar Toggle Button - Outside (shown when sidebar is closed) */}
       {!isSidebarOpen && (
         <button 
-          className="sidebar-toggle-btn"
+          className="office-sidebar-toggle-btn"
           onClick={() => setIsSidebarOpen(true)}
           aria-label="Toggle sidebar"
         >
@@ -438,130 +482,155 @@ const FloorDetail = () => {
 
       <div 
         ref={sidebarRef}
-        className={`floor-sidebar ${isSidebarOpen ? 'open' : ''}`}
+        className={`office-plan-sidebar ${isSidebarOpen ? 'open' : ''}`}
       >
-        <div className="sidebar-brand">
-          <div className="brand-main">OASIS</div>
-          <div className="brand-sub">PALM TOWER</div>
+        {/* Brand Logo */}
+        <div className="office-brand">
+          <h1 className="office-brand-main">OASIS</h1>
+          <h2 className="office-brand-sub">PALM TOWER</h2>
+          <div className="office-brand-line"></div>
         </div>
-        
-        <div className="floor-selector-container">
-          <div className="floor-selector-header">
-            <button 
-              className="floor-nav-btn" 
-              onClick={() => prevFloor && navigate(`/floor/${prevFloor.id}`)}
-              disabled={!prevFloor}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <div className="current-floor-display">{floor?.name}</div>
-            <button 
-              className="floor-nav-btn"
-              onClick={() => nextFloor && navigate(`/floor/${nextFloor.id}`)}
-              disabled={!nextFloor}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          
-          <div className="floor-list">
-            <div className="floor-list-title">Floor</div>
-            {allFloors.map((floorItem) => (
-              <div
-                key={floorItem.id}
-                className={`floor-list-item ${floorItem.id === floorId ? 'active' : ''}`}
-                onClick={() => navigate(`/floor/${floorItem.id}`)}
-              >
-                {floorItem.name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Top Header with Back Button */}
-      <div className="floor-detail-header">
-        <div></div>
-        <div className="header-right-controls">
-          <div className="zoom-controls-mobile">
-            <button className="zoom-btn" onClick={handleZoomIn} title="Zoom In">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-            <button className="zoom-btn" onClick={handleZoomOut} title="Zoom Out">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-            <button className="zoom-btn" onClick={handleResetZoom} title="Reset Zoom">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 2V18M2 10H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
+        {/* Floor Selector */}
+        <div className="office-selector">
+          <button 
+            className="office-nav-arrow" 
+            onClick={() => prevFloor && navigate(`/floor/${prevFloor.id}`)}
+            disabled={!prevFloor}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <div className="office-selector-display">
+            {floor?.name}
           </div>
-          <button className="back-to-building-btn" onClick={() => navigate('/explore-building')}>
-            Back to Building
+          <button 
+            className="office-nav-arrow"
+            onClick={() => nextFloor && navigate(`/floor/${nextFloor.id}`)}
+            disabled={!nextFloor}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </button>
         </div>
+
+        {/* Floor Details Panel */}
+        <div className="office-details-panel">
+          <div className="office-details-header">
+            <h3 className="office-details-title">{floor?.name}</h3>
+            <button className="office-favorite-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2L12.09 8.26L19 9L14 13.74L15.18 20L10 16.77L4.82 20L6 13.74L1 9L7.91 8.26L10 2Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+              </svg>
+            </button>
+          </div>
+          <div className="office-details-content">
+            <div className="office-detail-row">
+              <span className="office-detail-label">Floor:</span>
+              <span className="office-detail-value">{getFloorLabel(floorId)}</span>
+            </div>
+            <div className="office-detail-row">
+              <span className="office-detail-label">Units:</span>
+              <span className="office-detail-value">{floor?.units}</span>
+            </div>
+            <div className="office-detail-row">
+              <span className="office-detail-label">Type:</span>
+              <span className="office-detail-value">
+                {floorId?.includes('office') ? 'Office' : 
+                 floorId?.includes('apartment') ? 'Apartment' :
+                 floorId?.includes('pent-house') ? 'Pent House' : 
+                 floorId?.includes('shop') ? 'Shop' : 'Floor'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Project By */}
+        <div className="office-project-by">
+          <p className="office-project-text">A Project by</p>
+          <div className="office-developer-logo">
+            <span className="office-diamond">◆</span>
+            <span className="office-developer-name">TAIBA DEVELOPERS</span>
+          </div>
+        </div>
       </div>
 
-      {/* Floor Plan Container */}
-      <div 
-        className="floor-plan-container"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onClick={handleContainerClick}
-      >
+      {/* Main Content */}
+      <div className={`office-plan-main ${isSidebarOpen ? '' : 'sidebar-closed'}`}>
+        {/* Top Header - Right Side */}
+        <div className="office-plan-top-header">
+          <div></div>
+          <div className="office-header-right">
+            <button className="office-amenities-btn" onClick={() => setShowAmenities(!showAmenities)}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M9 1L11 7H17L12 10L14 16L9 12L4 16L6 10L1 7H7L9 1Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+              </svg>
+              Amenities
+            </button>
+          </div>
+        </div>
+
+        {/* Floor Plan Image Container */}
         <div 
-          ref={imageWrapperRef}
-          className="floor-plan-image-wrapper"
-          style={{
-            transform: `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
-            cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
-            position: 'relative',
-          }}
+          ref={containerRef}
+          className="office-plan-image-wrapper"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onClick={handleContainerClick}
         >
-          <img 
-            src={floorImage} 
-            alt={floor.name}
-            className="floor-plan-image"
-            draggable={false}
-          />
-          {/* Unit Overlay SVG */}
-          {units.length > 0 && (
-            <svg
-              ref={unitSvgRef}
-              className="unit-svg-overlay"
-              viewBox="0 0 1500 1080"
-              preserveAspectRatio="xMidYMid meet"
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-              }}
-            >
-              {units.map((unit) => (
-                <polygon
-                  key={unit.id}
-                  className={`unit-shape ${selectedUnit === unit.id ? 'selected' : ''}`}
-                  points={unit.points}
-                  data-unit={unit.name}
-                  onMouseMove={(e) => handleUnitMouseMove(e, unit)}
-                  onMouseLeave={handleUnitMouseLeave}
-                  onClick={(e) => handleUnitClick(e, unit)}
-                />
-              ))}
-            </svg>
-          )}
+          <div 
+            ref={imageWrapperRef}
+            className="floor-plan-image-wrapper"
+            style={{
+              transform: isClickingUnit
+                ? `translate(${position.x}px, ${position.y}px)`
+                : `translate(${position.x}px, ${position.y}px) scale(${zoom})`,
+              transformOrigin: '0 0',
+              cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default',
+              position: 'relative',
+              willChange: zoom > 1 ? 'transform' : 'auto',
+            }}
+          >
+            <img 
+              src={floorImage} 
+              alt={floor.name}
+              className="office-plan-image"
+              draggable={false}
+            />
+            {/* Unit Overlay SVG */}
+            {units.length > 0 && (
+              <svg
+                ref={unitSvgRef}
+                className="unit-svg-overlay"
+                viewBox="0 0 1500 1080"
+                preserveAspectRatio="xMidYMid meet"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                }}
+              >
+                {units.map((unit) => (
+                  <polygon
+                    key={unit.id}
+                    className={`unit-shape ${selectedUnit === unit.id ? 'selected' : ''}`}
+                    points={unit.points}
+                    data-unit={unit.name}
+                    onMouseMove={(e) => handleUnitMouseMove(e, unit)}
+                    onMouseLeave={handleUnitMouseLeave}
+                    onClick={(e) => handleUnitClick(e, unit)}
+                  />
+                ))}
+              </svg>
+            )}
+          </div>
+          {/* Tooltip rendered outside transformed wrapper to prevent position shifts */}
           {selectedUnit && (() => {
             const unit = units.find(u => u.id === selectedUnit);
             const isOfficeFloor = floorId?.includes('office');
@@ -620,52 +689,43 @@ const FloorDetail = () => {
             ) : null;
           })()}
         </div>
+
+        {/* Bottom Navigation */}
+        <div className="office-bottom-nav">
+          <button className="office-bottom-btn" onClick={handleResetZoom}>Reset Zoom</button>
+          <button className="office-bottom-btn" onClick={() => navigate('/explore-building')}>Back to Building</button>
+        </div>
       </div>
 
-
-      {/* Zoom Controls */}
-      <div className="zoom-controls">
-        <button className="zoom-btn" onClick={handleZoomIn} title="Zoom In">
+      {/* Right Sidebar - Action Buttons */}
+      <div className="office-action-buttons">
+        <button className="office-action-btn" title="Zoom In" onClick={handleZoomIn}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M10 4V16M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </button>
-        <button className="zoom-btn" onClick={handleZoomOut} title="Zoom Out">
+        <button className="office-action-btn" title="Zoom Out" onClick={handleZoomOut}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </button>
-        <button className="zoom-btn" onClick={handleResetZoom} title="Reset Zoom">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2V18M2 10H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </button>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="floor-action-buttons">
-        <button className="action-btn amenities-btn" onClick={() => setShowAmenities(!showAmenities)} title="Amenities">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M10 2L12.09 8.26L19 9L14 13.74L15.18 20L10 16.77L4.82 20L6 13.74L1 9L7.91 8.26L10 2Z" fill="currentColor"/>
-          </svg>
-        </button>
         <button 
-          className="action-btn" 
-          onClick={() => window.open('https://maps.app.goo.gl/WMjzyJq1Fpoy4zwL7?g_st=ic', '_blank')}
+          className="office-action-btn" 
           title="Get Directions"
+          onClick={() => window.open('https://maps.app.goo.gl/WMjzyJq1Fpoy4zwL7?g_st=ic', '_blank')}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M10 2C7.24 2 5 4.24 5 7C5 11.25 10 18 10 18C10 18 15 11.25 15 7C15 4.24 12.76 2 10 2ZM10 9.5C8.62 9.5 7.5 8.38 7.5 7C7.5 5.62 8.62 4.5 10 4.5C11.38 4.5 12.5 5.62 12.5 7C12.5 8.38 11.38 9.5 10 9.5Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
           </svg>
         </button>
         <button 
-          className="action-btn"
-          onClick={() => setShowRegisterModal(true)}
+          className="office-action-btn" 
           title="Register Request"
+          onClick={() => setShowRegisterModal(true)}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 4H16C17.1 4 18 4.9 18 6V14C18 15.1 17.1 16 16 16H4C2.9 16 2 15.1 2 14V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M18 6L10 11L2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3 4H17C18.1 4 19 4.9 19 6V14C19 15.1 18.1 16 17 16H3C1.9 16 1 15.1 1 14V6C1 4.9 1.9 4 3 4Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+            <path d="M19 6L10 11L1 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
         </button>
       </div>
@@ -692,16 +752,6 @@ const FloorDetail = () => {
         </div>
       )}
 
-      {/* Bottom Left - Developer Info */}
-      <div className="floor-developer-info">
-        <div className="floor-developer-text">
-          <div className="floor-developer-prefix">A Project by</div>
-          <div className="floor-developer-name-wrapper">
-            <span className="floor-developer-diamond">◆</span>
-            <span className="floor-developer-name">TAIBA DEVELOPERS</span>
-          </div>
-        </div>
-      </div>
 
       {/* Register Request Modal */}
       {showRegisterModal && (
