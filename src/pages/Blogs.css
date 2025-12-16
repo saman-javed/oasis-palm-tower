@@ -685,6 +685,46 @@
   color: #E6BE8A;
 }
 
+/* Fixed Get in Touch Button */
+.cta-button {
+  background: #080808 !important;
+  color: rgba(202, 171, 111, 0.603) !important;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(36, 36, 36, 0.525);
+  letter-spacing: 1px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  text-transform: uppercase;
+  border: 2px solid #000000;
+}
+
+.fixed-cta-button {
+  position: fixed;
+  bottom: 0.5%;
+  left: 5%;
+  z-index: 999;
+  transform: translateY(0);
+}
+
+.cta-button:hover {
+  background: #000000 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(192, 162, 104, 0.5) !important;
+  color: #C0A268 !important;
+}
+
+.cta-button:active {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(0, 109, 119, 0.4) !important;
+}
+
 /* Contact Icons */
 .contact-icons {
   position: fixed;
@@ -918,6 +958,16 @@
     width: 18px;
     height: 18px;
   }
+  
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .fixed-cta-button {
+    left: 3%;
+    bottom: 1%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -978,6 +1028,16 @@
     width: 16px;
     height: 16px;
   }
+  
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .fixed-cta-button {
+    left: 2%;
+    bottom: 1%;
+  }
 }
 
 @media (max-width: 360px) {
@@ -1003,6 +1063,16 @@
   
   .blog-card.small .blog-content p {
     font-size: 0.75rem;
+  }
+  
+  .cta-button {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+  
+  .fixed-cta-button {
+    left: 2%;
+    bottom: 0.5%;
   }
 }
 

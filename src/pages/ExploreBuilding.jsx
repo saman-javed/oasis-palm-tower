@@ -7,6 +7,7 @@ import gymImg from '../assets/emm-gym.png';
 import poolImg from '../assets/emm-pool.png';
 import gamingImg from '../assets/emm-gaming.png';
 import logo from '../assets/logo1.png';
+import AmenityModal from '../components/AmenityModal';
 
 // Amenities data
 const amenities = [
@@ -89,6 +90,7 @@ const ExploreBuilding = () => {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [showAmenities, setShowAmenities] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [selectedAmenity, setSelectedAmenity] = useState(null);
   const svgRef = useRef(null);
   const amenitiesSidebarRef = useRef(null);
   
@@ -305,7 +307,14 @@ const ExploreBuilding = () => {
         <div className="amenities-sidebar" ref={amenitiesSidebarRef}>
           <div className="amenities-sidebar-content">
             {amenities.map((amenity) => (
-              <div key={amenity.id} className="amenity-sidebar-card">
+              <div 
+                key={amenity.id} 
+                className="amenity-sidebar-card"
+                onClick={() => {
+                  setSelectedAmenity({ id: amenity.id, name: amenity.name });
+                  setShowAmenities(false);
+                }}
+              >
                 {amenity.image ? (
                   <img src={amenity.image} alt={amenity.name} className="amenity-sidebar-image" />
                 ) : (
@@ -320,6 +329,16 @@ const ExploreBuilding = () => {
             ))}
           </div>
         </div>
+      )}
+
+      {/* Amenity Modal */}
+      {selectedAmenity && (
+        <AmenityModal 
+          isOpen={!!selectedAmenity} 
+          onClose={() => setSelectedAmenity(null)} 
+          amenityId={selectedAmenity.id}
+          amenityName={selectedAmenity.name}
+        />
       )}
 
       {/* Register Request Modal */}

@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+.parking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.489);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 80px;
+  animation: fadeIn 0.3s ease;
+  pointer-events: all;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.parking-modal-content {
+  position: relative;
+  width: calc(100% - 100px);
+  height: calc(100% - 60px);
+  max-width: calc(100vw - 100px);
+  max-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  animation: slideUp 0.3s ease;
+  pointer-events: all;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Main Image Container */
+.parking-main-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.parking-main-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.parking-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 8px;
+}
+
+.parking-image-text-overlay {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  text-align: left;
+}
+
+/* Navigation Arrows */
+.parking-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  z-index: 10;
+}
+
+.parking-nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.parking-nav-arrow-left {
+  left: 20px;
+}
+
+.parking-nav-arrow-right {
+  right: 20px;
+}
+
+.parking-nav-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Progress Indicator - Inside Image Container */
+.parking-progress-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.parking-progress-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.parking-progress-dot {
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.parking-progress-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.parking-progress-dot.active {
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+}
+
+
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .parking-modal-overlay {
+    padding: 30px;
+  }
+
+  .parking-modal-content {
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+  }
+
+  .parking-nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .parking-nav-arrow-left {
+    left: 15px;
+  }
+
+  .parking-nav-arrow-right {
+    right: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .parking-modal-overlay {
+    padding: 20px;
+  }
+
+  .parking-modal-content {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+  }
+
+  .parking-image-text-overlay {
+    bottom: 40px;
+    left: 20px;
+    font-size: 0.9rem;
+  }
+
+  .parking-nav-arrow {
+    width: 35px;
+    height: 35px;
+  }
+
+  .parking-nav-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .parking-modal-overlay {
+    padding: 15px;
+  }
+
+  .parking-modal-content {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+  }
+
+  .parking-image-text-overlay {
+    bottom: 35px;
+    left: 15px;
+    font-size: 0.8rem;
+  }
+
+  .parking-nav-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .parking-nav-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .parking-nav-arrow-left {
+    left: 10px;
+  }
+
+  .parking-nav-arrow-right {
+    right: 10px;
+  }
+}
+

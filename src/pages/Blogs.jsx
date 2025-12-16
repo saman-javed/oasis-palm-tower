@@ -68,14 +68,13 @@ function Blogs() {
           <div className="blog-card featured">
             <div className="blog-image">
               <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Oasis Palm Tower" />
-              <div className="blog-icon">💎</div>
+              <div className="blog-icon"></div>
               <div className="blog-overlay">
                 <p>Oasis Palm Tower - A Three-in-One Luxury Development in Faisal Hills, Islamabad</p>
               </div>
             </div>
             <div className="blog-content">
               <h2>Oasis Palm Tower - Your Complete Lifestyle Destination</h2>
-              <button className="cta-button">Get in Touch</button>
               <p className="blog-description">
                 Oasis Palm Tower is a unique three-in-one development located in Faisal Hills, Islamabad. This exceptional project combines luxury hotels, premium apartment rooms, modern corporate offices, and ground floor commercial shops - all in one magnificent building. Experience the perfect blend of residential comfort, business convenience, and commercial opportunities...
               </p>
@@ -332,6 +331,14 @@ function Blogs() {
           </div>
         </div>
       </div>
+
+      {/* Fixed Get in Touch Button */}
+      <button 
+        className="cta-button fixed-cta-button"
+        onClick={() => setShowRegisterModal(true)}
+      >
+        Get in Touch
+      </button>
 
       {/* Contact Icons */}
       <div className="contact-icons">

@@ -25,12 +25,14 @@ import gymImg from '../assets/emm-gym.png';
 import poolImg from '../assets/emm-pool.png';
 import gamingImg from '../assets/emm-gaming.png';
 import logo from '../assets/logo1.png';
+import AmenityModal from '../components/AmenityModal';
 
 const ExplorePlan = () => {
   const navigate = useNavigate();
   const { floorId, unitId } = useParams();
   const [showAmenities, setShowAmenities] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [selectedAmenity, setSelectedAmenity] = useState(null);
   const [zoom, setZoom] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     // Open by default on larger screens, closed on mobile (below 900px)
@@ -519,7 +521,14 @@ const ExplorePlan = () => {
             <div className="amenities-sidebar" ref={amenitiesSidebarRef}>
               <div className="amenities-sidebar-content">
                 {amenities.map((amenity) => (
-                  <div key={amenity.id} className="amenity-sidebar-card">
+                  <div 
+                    key={amenity.id} 
+                    className="amenity-sidebar-card"
+                    onClick={() => {
+                      setSelectedAmenity({ id: amenity.id, name: amenity.name });
+                      setShowAmenities(false);
+                    }}
+                  >
                     {amenity.image ? (
                       <img src={amenity.image} alt={amenity.name} className="amenity-sidebar-image" />
                     ) : (
@@ -534,6 +543,16 @@ const ExplorePlan = () => {
                 ))}
               </div>
             </div>
+          )}
+
+          {/* Amenity Modal */}
+          {selectedAmenity && (
+            <AmenityModal 
+              isOpen={!!selectedAmenity} 
+              onClose={() => setSelectedAmenity(null)} 
+              amenityId={selectedAmenity.id}
+              amenityName={selectedAmenity.name}
+            />
           )}
 
           {/* Register Request Modal */}
@@ -789,7 +808,14 @@ const ExplorePlan = () => {
           <div className="amenities-sidebar" ref={amenitiesSidebarRef}>
             <div className="amenities-sidebar-content">
               {amenities.map((amenity) => (
-                <div key={amenity.id} className="amenity-sidebar-card">
+                <div 
+                  key={amenity.id} 
+                  className="amenity-sidebar-card"
+                  onClick={() => {
+                    setSelectedAmenity({ id: amenity.id, name: amenity.name });
+                    setShowAmenities(false);
+                  }}
+                >
                   {amenity.image ? (
                     <img src={amenity.image} alt={amenity.name} className="amenity-sidebar-image" />
                   ) : (
@@ -804,6 +830,16 @@ const ExplorePlan = () => {
               ))}
             </div>
           </div>
+        )}
+
+        {/* Amenity Modal */}
+        {selectedAmenity && (
+          <AmenityModal 
+            isOpen={!!selectedAmenity} 
+            onClose={() => setSelectedAmenity(null)} 
+            amenityId={selectedAmenity.id}
+            amenityName={selectedAmenity.name}
+          />
         )}
 
         {/* Register Request Modal */}
@@ -894,7 +930,14 @@ const ExplorePlan = () => {
           <div className="amenities-sidebar" ref={amenitiesSidebarRef}>
             <div className="amenities-sidebar-content">
               {amenities.map((amenity) => (
-                <div key={amenity.id} className="amenity-sidebar-card">
+                <div 
+                  key={amenity.id} 
+                  className="amenity-sidebar-card"
+                  onClick={() => {
+                    setSelectedAmenity({ id: amenity.id, name: amenity.name });
+                    setShowAmenities(false);
+                  }}
+                >
                   {amenity.image ? (
                     <img src={amenity.image} alt={amenity.name} className="amenity-sidebar-image" />
                   ) : (
@@ -909,6 +952,16 @@ const ExplorePlan = () => {
               ))}
             </div>
           </div>
+        )}
+
+        {/* Amenity Modal */}
+        {selectedAmenity && (
+          <AmenityModal 
+            isOpen={!!selectedAmenity} 
+            onClose={() => setSelectedAmenity(null)} 
+            amenityId={selectedAmenity.id}
+            amenityName={selectedAmenity.name}
+          />
         )}
       </div>
     );

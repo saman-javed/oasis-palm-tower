@@ -326,16 +326,16 @@ const Navbar = ({ scrollToSection }) => {
             >
               Blogs
             </Link>
-            <Link 
-              to="/explore-building" 
-              className={`mobile-nav-link ${activeSection === 'explore-building' ? 'active' : ''}`}
-              onClick={closeMobileMenu}
-            >
-              Explore Building
-            </Link>
-        </div>
-        
-      
+          </div>
+          
+          {/* Explore Building Button */}
+          <Link 
+            to="/explore-building" 
+            className="mobile-explore-btn"
+            onClick={closeMobileMenu}
+          >
+            Explore Building
+          </Link>
         </div>
       </div>
     </nav>
